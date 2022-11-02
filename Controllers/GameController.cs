@@ -4,11 +4,11 @@ using System.Diagnostics;
 
 namespace RockPaperScissors.Controllers
 {
-    public class HomeController : Controller
+    public class GameController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<GameController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public GameController(ILogger<GameController> logger)
         {
             _logger = logger;
         }
@@ -16,6 +16,11 @@ namespace RockPaperScissors.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult PlayFree()
+        {
+            return View(new PlayFreeModel());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

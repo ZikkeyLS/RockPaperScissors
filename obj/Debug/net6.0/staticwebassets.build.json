@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2pVQlchDfZQ4YTMNRUQShuNxmP3psD/LtNGW37Z7aIk=",
+  "Hash": "PcaZ7+lwbHhaB8JYbffhNborXBmhWA/eY5bZAADI1xY=",
   "Source": "RockPaperScissors",
   "BasePath": "_content/RockPaperScissors",
   "Mode": "Default",
@@ -49,6 +49,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\RockPaperScissors.bundle.scp.css"
+    },
+    {
+      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\PlayFree\\Landscape.css",
+      "SourceId": "RockPaperScissors",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
+      "BasePath": "_content/RockPaperScissors",
+      "RelativePath": "css/PlayFree/Landscape.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\PlayFree\\Landscape.css"
+    },
+    {
+      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\PlayFree\\Portrait.css",
+      "SourceId": "RockPaperScissors",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
+      "BasePath": "_content/RockPaperScissors",
+      "RelativePath": "css/PlayFree/Portrait.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\PlayFree\\Portrait.css"
     },
     {
       "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\site.css",

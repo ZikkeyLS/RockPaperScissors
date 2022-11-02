@@ -15,12 +15,16 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = D:\Projects\CSharp\Заказ-RockPaperScissors\RockPaperScissors
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Projects/CSharp/Заказ-RockPaperScissors/RockPaperScissors/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+[D:/Projects/CSharp/Заказ-RockPaperScissors/RockPaperScissors/Views/Game/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Projects/CSharp/Заказ-RockPaperScissors/RockPaperScissors/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+[D:/Projects/CSharp/Заказ-RockPaperScissors/RockPaperScissors/Views/Game/PlayFree.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZVxQbGF5RnJlZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projects/CSharp/Заказ-RockPaperScissors/RockPaperScissors/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/CSharp/Заказ-RockPaperScissors/RockPaperScissors/Views/Shared/Error.cshtml]
