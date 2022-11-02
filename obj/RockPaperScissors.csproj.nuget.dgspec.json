@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Projects\\CSharp\\RockPaperScissors\\RockPaperScissors.csproj": {}
+    "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\RockPaperScissors.csproj": {}
   },
   "projects": {
-    "D:\\Projects\\CSharp\\RockPaperScissors\\RockPaperScissors.csproj": {
+    "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\RockPaperScissors.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Projects\\CSharp\\RockPaperScissors\\RockPaperScissors.csproj",
+        "projectUniqueName": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\RockPaperScissors.csproj",
         "projectName": "RockPaperScissors",
-        "projectPath": "D:\\Projects\\CSharp\\RockPaperScissors\\RockPaperScissors.csproj",
+        "projectPath": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\RockPaperScissors.csproj",
         "packagesPath": "C:\\Users\\Sergey\\.nuget\\packages\\",
-        "outputPath": "D:\\Projects\\CSharp\\RockPaperScissors\\obj\\",
+        "outputPath": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -43,6 +43,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Telegram.Bot.Extensions.LoginWidget": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

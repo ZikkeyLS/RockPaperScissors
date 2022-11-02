@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "qHzgi9upVrFeQZiDsaQmAFC1ARXRM5orjbOv9dXEmkNwDGMue9Yr1P78YkVwakiQFUieIvX0yPWcUlp4P03WzA==",
+  "dgSpecHash": "atKkUrxEwvXhWtvC9Ewi1QDk2toiKfYb4BjnGIs4lvDHrBQ+zRPFWr0hP5rFwTWYYG0IxKrfJn+pO6RgXm1vvQ==",
   "success": true,
-  "projectFilePath": "D:\\Projects\\CSharp\\RockPaperScissors\\RockPaperScissors.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\RockPaperScissors.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Sergey\\.nuget\\packages\\telegram.bot.extensions.loginwidget\\1.2.0\\telegram.bot.extensions.loginwidget.1.2.0.nupkg.sha512"
+  ],
   "logs": []
 }
