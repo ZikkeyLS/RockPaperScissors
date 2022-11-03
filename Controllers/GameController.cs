@@ -31,5 +31,25 @@ namespace RockPaperScissors.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        [HttpGet]
+        public JsonResult GetNames()
+        {
+            var names = new string[3]
+            {
+                "Fuck",
+                "You",
+                "Slave"
+            };
+
+            
+            return new JsonResult(Ok(names));
+        }
+
+        [HttpPost]
+        public JsonResult PostName(string name)
+        {
+            return new JsonResult(Ok());
+        }
     }
 }

@@ -1,0 +1,47 @@
+﻿@media (orientation: landscape) and (max-width: 1920px) {
+    .light-button {
+        font-size: 40px;
+        width: 400px;
+        height: 200px;
+        border-radius: 100px;
+        margin-top: 200px;
+    }
+
+    h2 { 
+        font-size: 35px;
+        margin-top: 400px;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1200px) {
+    .light-button {
+        font-size: 20px;
+        width: 150px;
+        height: 80px;
+        margin-left: 200px;
+        margin-right: 200px;
+        border-radius: 100px;
+        border: 3px solid black;
+        margin-top: 60px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-top: 100px;
+    }
+}
+
+@media (orientation: portrait) and (max-width: 2000px) {
+    .light-button {
+        font-size: 40px;
+        width: 300px;
+        height: 150px;
+        border-radius: 100px;
+        margin-top: 200px;
+    }
+
+    h2 {
+        font-size: 35px;
+        margin-top: 200px;
+    }
+}

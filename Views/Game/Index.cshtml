@@ -2,8 +2,17 @@
     ViewData["Title"] = "Menu";
 }
 
-<div class="content">
-    <nav class="navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <h5>Ладно.</h5>
-    </nav>
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/GameIndex/GameIndex.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/GameIndex/GameIndexMedia.css" asp-append-version="true" />
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+            <h5 class="game-index-text">120 баллов</h5>
+            <h5 class="game-index-text">10 игр сыграно</h5>
+            <button id="free-play-button" class="light-button" onclick="location.href='@Url.Action("PlayFree", "Game", new { })'">Свободная игра</button>
+            <button id="play-button" class="light-button">Играть</button>
+        </div>
+    </div>
 </div>
