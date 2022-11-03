@@ -13,8 +13,11 @@ namespace RockPaperScissors.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int id, string username)
         {
+            Console.WriteLine(id);
+            Console.WriteLine(username);
+
             return View();
         }
 

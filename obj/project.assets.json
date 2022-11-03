@@ -1,36 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
-      "Telegram.Bot.Extensions.LoginWidget/1.2.0": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Telegram.Bot.Extensions.LoginWidget.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Telegram.Bot.Extensions.LoginWidget.dll": {}
-        }
-      }
-    }
+    "net6.0": {}
   },
-  "libraries": {
-    "Telegram.Bot.Extensions.LoginWidget/1.2.0": {
-      "sha512": "t+CB3gkXEImFp4+PdV29/8G6hfuluHXmNS0qZGZZzoUaok8+QIlvjc+oJzTvTytj2Auji26tyI8qgY5Lf+Ibpg==",
-      "type": "package",
-      "path": "telegram.bot.extensions.loginwidget/1.2.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/netstandard2.0/Telegram.Bot.Extensions.LoginWidget.dll",
-        "telegram.bot.extensions.loginwidget.1.2.0.nupkg.sha512",
-        "telegram.bot.extensions.loginwidget.nuspec"
-      ]
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0": [
-      "Telegram.Bot.Extensions.LoginWidget >= 1.2.0"
-    ]
+    "net6.0": []
   },
   "packageFolders": {
     "C:\\Users\\Sergey\\.nuget\\packages\\": {},
@@ -75,12 +50,6 @@
     "frameworks": {
       "net6.0": {
         "targetAlias": "net6.0",
-        "dependencies": {
-          "Telegram.Bot.Extensions.LoginWidget": {
-            "target": "Package",
-            "version": "[1.2.0, )"
-          }
-        },
         "imports": [
           "net461",
           "net462",

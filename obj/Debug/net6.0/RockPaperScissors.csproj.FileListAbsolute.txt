@@ -76,5 +76,3 @@ D:\Projects\CSharp\Заказ-RockPaperScissors\RockPaperScissors\obj\Debug\net6
 D:\Projects\CSharp\Заказ-RockPaperScissors\RockPaperScissors\obj\Debug\net6.0\RockPaperScissors.pdb
 D:\Projects\CSharp\Заказ-RockPaperScissors\RockPaperScissors\obj\Debug\net6.0\RockPaperScissors.genruntimeconfig.cache
 D:\Projects\CSharp\Заказ-RockPaperScissors\RockPaperScissors\obj\Debug\net6.0\ref\RockPaperScissors.dll
-D:\Projects\CSharp\Заказ-RockPaperScissors\RockPaperScissors\bin\Debug\net6.0\Telegram.Bot.Extensions.LoginWidget.dll
-D:\Projects\CSharp\Заказ-RockPaperScissors\RockPaperScissors\obj\Debug\net6.0\RockPaperScissors.csproj.CopyComplete

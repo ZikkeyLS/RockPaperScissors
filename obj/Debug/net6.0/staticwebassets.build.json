@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "PcaZ7+lwbHhaB8JYbffhNborXBmhWA/eY5bZAADI1xY=",
+  "Hash": "NN7VyXhKilQjpLl/7M/8OciqH+BQtN3i+3m89p9Z85s=",
   "Source": "RockPaperScissors",
   "BasePath": "_content/RockPaperScissors",
   "Mode": "Default",
@@ -967,6 +967,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\lib\\jquery-ajax\\jquery.unobtrusive-ajax.js",
+      "SourceId": "RockPaperScissors",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
+      "BasePath": "_content/RockPaperScissors",
+      "RelativePath": "lib/jquery-ajax/jquery.unobtrusive-ajax.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-ajax\\jquery.unobtrusive-ajax.js"
+    },
+    {
+      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\lib\\jquery-ajax\\jquery.unobtrusive-ajax.min.js",
+      "SourceId": "RockPaperScissors",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
+      "BasePath": "_content/RockPaperScissors",
+      "RelativePath": "lib/jquery-ajax/jquery.unobtrusive-ajax.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-ajax\\jquery.unobtrusive-ajax.min.js"
     },
     {
       "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
