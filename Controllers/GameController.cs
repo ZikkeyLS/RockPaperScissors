@@ -26,6 +26,31 @@ namespace RockPaperScissors.Controllers
             return View(new PlayFreeModel());
         }
 
+        public IActionResult LevelSelector()
+        {
+            return View();
+        }
+
+        public IActionResult Queue()
+        {
+            return View();
+        }
+
+        public IActionResult Round()
+        {
+            return View();
+        }
+
+        public IActionResult Status()
+        {
+            return View();
+        }
+
+        public IActionResult Win()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
@@ -41,7 +66,6 @@ namespace RockPaperScissors.Controllers
                 "You",
                 "Slave"
             };
-
             
             return new JsonResult(Ok(names));
         }

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Menu";
+    ViewData["Title"] = "GameMenu";
 }
 
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -12,7 +12,7 @@
             <h5 class="game-index-text">120 баллов</h5>
             <h5 class="game-index-text">10 игр сыграно</h5>
             <button id="free-play-button" class="light-button" onclick="location.href='@Url.Action("PlayFree", "Game", new { })'">Свободная игра</button>
-            <button id="play-button" class="light-button">Играть</button>
+            <button id="play-button" class="light-button" onclick="location.href='@Url.Action("LevelSelector", "Game", new { })'">Играть</button>
         </div>
     </div>
 </div>

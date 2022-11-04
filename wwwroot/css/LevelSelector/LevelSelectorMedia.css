@@ -1,0 +1,77 @@
+﻿@media (orientation: landscape) and (max-width: 1920px) {
+    .light-button {
+        font-size: 15px;
+        width: 175px;
+        height: 50px;
+        border: 2px solid black;
+        border-radius: 100px;
+        margin-bottom: 15px;
+        margin-left: 20px;
+    }
+
+    .level-table {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-right: 20px;
+    }
+
+    #light-button-exit {
+        font-size: 30px;
+        width: 300px;
+        height: 150px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1200px) {
+    .light-button {
+        font-size: 15px;
+        width: 175px;
+        height: 50px;
+        border: 2px solid black;
+        border-radius: 100px;
+        margin-bottom: 15px;
+        margin-left: 20px;
+    }
+
+    .level-table {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        margin-right: 20px;
+    }
+
+    #light-button-exit {
+        font-size: 30px;
+        width: 300px;
+        height: 150px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+    }
+}
+
+@media (orientation: portrait) and (max-width: 2000px) {
+    .light-button {
+        font-size: 15px;
+        width: 130px;
+        height: 42px;
+        border: 2px solid black;
+        border-radius: 100px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+    }
+
+    .level-table {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        margin-right: 10px;
+    }
+
+    #light-button-exit {
+        font-size: 30px;
+        width: 200px;
+        height: 100px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+    }
+}

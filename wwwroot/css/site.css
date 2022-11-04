@@ -14,12 +14,12 @@ html {
 }
 
 body {
-  margin-top: 25px;
+  margin-top: 15px;
 }
 
 .light-button {
     border: 4px solid black;
-    border-radius: 5px;
+    border-radius: 100px;
     background-color: transparent;
     color: black;
 }

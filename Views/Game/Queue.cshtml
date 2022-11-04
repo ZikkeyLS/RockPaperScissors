@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Queue";
+}
+
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Queue/QueueMedia.css" asp-append-version="true" />
+
+<section class="d-flex flex-column justify-content-center align-items-center">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 text-center">
+            <h2>Уровень: 0</h2>
+            <h2>Номер в очереди: 10</h2>
+            <h2>Время ожидания: 1:49 минут</h2>
+            <img src="/images/tutorial.png" alt="Tutorial"/>
+            <button class="light-button" onclick="location.href='@Url.Action("Index", "Game", new { })'">Выйти</button>
+        </div>
+      </div>
+    </div>
+</section>
+
+

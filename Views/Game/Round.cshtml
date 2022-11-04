@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Round";
+}
+
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/Round/RoundMedia.css" asp-append-version="true" />
+
+<section class="d-flex flex-column justify-content-center align-items-center">
+        <div class="container col-lg-6 text-center">
+            <h2>Раунд: 0-1</h2>
+            <h2>Взнос: 10 баллов</h2>
+            <h2>Осталось: 5 секунд </h2>
+            <div class="pictures-container">    
+                <img class="circle" src="/images/tutorial.png" onclick="location.href='@Url.Action("Index", "Game", new { })'" alt="ChoiceA"/>
+                <img class="circle" src="/images/tutorial.png" onclick="location.href='@Url.Action("Index", "Game", new { })'" alt="ChoiceB"/>
+                <img class="circle" src="/images/tutorial.png" onclick="location.href='@Url.Action("Index", "Game", new { })'" alt="ChoiceC"/>
+                <img class="circle" src="/images/tutorial.png" onclick="location.href='@Url.Action("Index", "Game", new { })'" alt="ChoiceD"/>
+                <img class="circle" src="/images/tutorial.png" onclick="location.href='@Url.Action("Index", "Game", new { })'" alt="ChoiceE"/>
+                <img class="circle" src="/images/tutorial.png" onclick="location.href='@Url.Action("Index", "Game", new { })'" alt="ChoiceF"/>
+                <img class="circle" src="/images/tutorial.png" onclick="location.href='@Url.Action("Index", "Game", new { })'" alt="ChoiceG"/>
+            </div>
+        </div>
+</section>
+
+
