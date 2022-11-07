@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "aGRA7UScU5c9fvbAEWx6331qnBL1bwwCfp3oPZz9Vyc=",
+  "Hash": "oUb/7iDgiZ44Usjte9ZVz1wRzHG1BEh1nCITTgNNtQY=",
   "Source": "RockPaperScissors",
   "BasePath": "_content/RockPaperScissors",
   "Mode": "Default",
@@ -51,23 +51,6 @@
       "OriginalItemSpec": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\RockPaperScissors.bundle.scp.css"
     },
     {
-      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\GameIndex\\GameIndex.css",
-      "SourceId": "RockPaperScissors",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
-      "BasePath": "_content/RockPaperScissors",
-      "RelativePath": "css/GameIndex/GameIndex.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\GameIndex\\GameIndex.css"
-    },
-    {
       "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\GameIndex\\GameIndexMedia.css",
       "SourceId": "RockPaperScissors",
       "SourceType": "Discovered",
@@ -83,23 +66,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\GameIndex\\GameIndexMedia.css"
-    },
-    {
-      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\LevelSelector\\LevelSelector.css",
-      "SourceId": "RockPaperScissors",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
-      "BasePath": "_content/RockPaperScissors",
-      "RelativePath": "css/LevelSelector/LevelSelector.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\LevelSelector\\LevelSelector.css"
     },
     {
       "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\LevelSelector\\LevelSelectorMedia.css",
@@ -119,23 +85,6 @@
       "OriginalItemSpec": "wwwroot\\css\\LevelSelector\\LevelSelectorMedia.css"
     },
     {
-      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\PlayFree\\PlayFree.css",
-      "SourceId": "RockPaperScissors",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
-      "BasePath": "_content/RockPaperScissors",
-      "RelativePath": "css/PlayFree/PlayFree.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\PlayFree\\PlayFree.css"
-    },
-    {
       "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\PlayFree\\PlayFreeMedia.css",
       "SourceId": "RockPaperScissors",
       "SourceType": "Discovered",
@@ -153,23 +102,6 @@
       "OriginalItemSpec": "wwwroot\\css\\PlayFree\\PlayFreeMedia.css"
     },
     {
-      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Queue\\Queue.css",
-      "SourceId": "RockPaperScissors",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
-      "BasePath": "_content/RockPaperScissors",
-      "RelativePath": "css/Queue/Queue.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Queue\\Queue.css"
-    },
-    {
       "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Queue\\QueueMedia.css",
       "SourceId": "RockPaperScissors",
       "SourceType": "Discovered",
@@ -185,23 +117,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Queue\\QueueMedia.css"
-    },
-    {
-      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Round\\Round.css",
-      "SourceId": "RockPaperScissors",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
-      "BasePath": "_content/RockPaperScissors",
-      "RelativePath": "css/Round/Round.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Round\\Round.css"
     },
     {
       "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Round\\RoundMedia.css",
@@ -238,23 +153,6 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Status\\Status.css",
-      "SourceId": "RockPaperScissors",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
-      "BasePath": "_content/RockPaperScissors",
-      "RelativePath": "css/Status/Status.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Status\\Status.css"
-    },
-    {
       "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Status\\StatusMedia.css",
       "SourceId": "RockPaperScissors",
       "SourceType": "Discovered",
@@ -270,23 +168,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\Status\\StatusMedia.css"
-    },
-    {
-      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Win\\Win.css",
-      "SourceId": "RockPaperScissors",
-      "SourceType": "Discovered",
-      "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
-      "BasePath": "_content/RockPaperScissors",
-      "RelativePath": "css/Win/Win.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Win\\Win.css"
     },
     {
       "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Win\\WinMedia.css",

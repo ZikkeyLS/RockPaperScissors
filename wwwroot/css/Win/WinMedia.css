@@ -1,4 +1,30 @@
-﻿@media (orientation: landscape) and (max-width: 1920px) {
+﻿@media (orientation: landscape) and (max-width: 2300px) {
+    .light-button {
+        width: 40vh;
+        height: 20vh;
+        font-size: 4vh;
+        margin-top: 2vh;
+    }
+
+    #status-text {
+        margin: 4vh;
+    }
+
+    h2 {
+        margin: 2vh;
+    }
+
+    h3 {
+        font-size: 3vh;
+    }
+
+    #win-icon {
+        width: 45vh;
+        height: 45vh;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1920px) {
     .light-button {
         width: 40vh;
         height: 20vh;

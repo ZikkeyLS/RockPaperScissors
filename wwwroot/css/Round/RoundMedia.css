@@ -1,4 +1,30 @@
-﻿@media (orientation: landscape) and (max-width: 1920px) {
+﻿@media (orientation: landscape) and (max-width: 2300px) {
+    .container {
+        display: table;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .pictures-container {
+        display: table;
+        border-collapse: collapse;
+        table-layout: fixed;
+        margin-top: 3vh;
+    }
+
+    .circle {
+        font-size: 3vh;
+        width: 20vh;
+        height: 20vh;
+        border: 4px solid black;
+        border-radius: 10vh;
+        position: inherit;
+        display: inline-block;
+        margin: 1vh;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1920px) {
     .container {
         display: table;
         border-collapse: collapse;

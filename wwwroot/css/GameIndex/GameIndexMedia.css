@@ -1,4 +1,29 @@
-﻿@media (orientation: landscape) and (max-width: 1920px) {
+﻿@media (orientation: landscape) and (max-width: 2300px) {
+    .light-button {
+        font-size: 4vh;
+        width: 40vh;
+        height: 20vh;
+        border-radius: 100px;
+        margin-top: 10vh;
+        margin-right: 10vh;
+        margin-left: 10vh;
+    }
+
+    .game-index-text {
+        font-size: 5vh;
+        margin-top: 3vh;
+    }
+
+    #free-play-button {
+        margin-top: 18vh;
+    }
+
+    #play-button {
+        margin-top: 13vh;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1920px) {
     .light-button {
         font-size: 4vh;
         width: 40vh;
