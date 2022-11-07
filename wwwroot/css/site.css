@@ -23,3 +23,19 @@ body {
     background-color: transparent;
     color: black;
 }
+
+.light-button:hover:enabled {
+    color: gray;
+    border-color: gray;
+}
+
+.light-button:active:enabled {
+    color: black;
+    border-color: black;
+    background-color: gray;
+}
+
+.light-button:disabled {
+    color: dimgray;
+    border-color: dimgray;
+}

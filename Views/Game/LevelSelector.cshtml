@@ -2,12 +2,10 @@
     ViewData["Title"] = "LevelSelector";
 }
 
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/css/LevelSelector/LevelSelector.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/LevelSelector/LevelSelectorMedia.css" asp-append-version="true" />
 
 <div class="text-center">
-    <h2>0 баллов лол</h2>
+    <h2>2543423 баллов</h2>
     <h2>Выберите уровень:</h2>
 </div>
 <div class="level-table text-center">
@@ -49,7 +47,7 @@
     </nav>
         <nav>
         <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
+        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'" disabled="disabled">Свободная игра</button>
     </nav>
 </div>
 <div class="text-center">

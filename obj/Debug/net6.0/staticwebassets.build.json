@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1TYaT/uLjeeJ+9Q51CeU5kzKrUSng4mpocOBYUH6XJU=",
+  "Hash": "aGRA7UScU5c9fvbAEWx6331qnBL1bwwCfp3oPZz9Vyc=",
   "Source": "RockPaperScissors",
   "BasePath": "_content/RockPaperScissors",
   "Mode": "Default",
@@ -238,12 +238,12 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Status - Копировать\\Status.css",
+      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Status\\Status.css",
       "SourceId": "RockPaperScissors",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
       "BasePath": "_content/RockPaperScissors",
-      "RelativePath": "css/Status - Копировать/Status.css",
+      "RelativePath": "css/Status/Status.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -252,15 +252,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Status - Копировать\\Status.css"
+      "OriginalItemSpec": "wwwroot\\css\\Status\\Status.css"
     },
     {
-      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Status - Копировать\\StatusMedia.css",
+      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Status\\StatusMedia.css",
       "SourceId": "RockPaperScissors",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
       "BasePath": "_content/RockPaperScissors",
-      "RelativePath": "css/Status - Копировать/StatusMedia.css",
+      "RelativePath": "css/Status/StatusMedia.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -269,7 +269,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Status - Копировать\\StatusMedia.css"
+      "OriginalItemSpec": "wwwroot\\css\\Status\\StatusMedia.css"
     },
     {
       "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\css\\Win\\Win.css",

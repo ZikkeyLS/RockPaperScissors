@@ -1,58 +1,60 @@
 ﻿@media (orientation: landscape) and (max-width: 1920px) {
     .light-button {
-        width: 450px;
-        height: 225px;
-        font-size: 40px;
+        width: 45vh;
+        height: 23vh;
+        font-size: 4vh;
     }
 
     h2 {
-        margin-top: 15px;
+        font-size: 3vh;
+        margin-top: 1vh;
     }
 
     img {
-        margin-top: 10px;
-        margin-bottom: 20px;
-        width: 500px;
-        height: 500px;
+        margin-top: 1vh;
+        margin-bottom: 2vh;
+        width: 50vh;
+        height: 50vh;
     }
 }
 
 @media (orientation: landscape) and (max-width: 1200px) {
     .light-button {
-        width: 250px;
-        height: 125px;
-        font-size: 30px;
+        width: 50vh;
+        height: 20vh;
+        font-size: 6vh;
+        border: 3px solid black;
     }
 
     h2 {
-        margin-top: 5px;
-        font-size: 20px;
+        margin-top: 1vh;
+        font-size: 4vh;
     }
 
     img {
         margin-top: 4px;
-        margin-left: 50px;
-        margin-right: 20px;
-        width: 175px;
-        height: 175px;
+        margin-left: 60vh;
+        margin-right: 60vh;
+        width: 35vh;
+        height: 35vh;
     }
 }
 
 @media (orientation: portrait) and (max-width: 2000px) {
     .light-button {
-        width: 250px;
-        height: 125px;
-        font-size: 30px;
+        width: 30vh;
+        height: 15vh;
+        font-size: 4vh;
     }
 
     h2 {
-        margin-top: 15px;
+        margin-top: 2vh;
     }
 
     img {
-        margin-top: 10px;
-        margin-bottom: 20px;
-        width: 400px;
-        height: 400px;
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+        width: 45vh;
+        height: 45vh;
     }
 }

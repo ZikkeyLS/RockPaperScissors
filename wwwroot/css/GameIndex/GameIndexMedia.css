@@ -1,69 +1,70 @@
 ﻿@media (orientation: landscape) and (max-width: 1920px) {
     .light-button {
-        font-size: 40px;
-        width: 400px;
-        height: 200px;
+        font-size: 4vh;
+        width: 40vh;
+        height: 20vh;
         border-radius: 100px;
-        margin-top: 100px;
-        margin-right: 20px;
+        margin-top: 10vh;
+        margin-right: 10vh;
+        margin-left: 10vh;
     }
 
     .game-index-text {
-        font-size: 50px;
-        margin-top: 25px;
+        font-size: 5vh;
+        margin-top: 3vh;
     }
 
     #free-play-button {
-        margin-top: 180px;
+        margin-top: 18vh;
     }
 
     #play-button {
-        margin-top: 125px;
+        margin-top: 13vh;
     }
 }
 
 @media (orientation: landscape) and (max-width: 1200px) {
     .light-button {
-        font-size: 20px;
-        width: 150px;
-        height: 80px;
-        margin-left: 200px;
-        margin-right: 200px;
-        border-radius: 100px;
+        font-size: 4vh;
+        width: 40vh;
+        height: 20vh;
+        margin-left: 50vh;
+        margin-right: 50vh;
+        border-radius: 10vh;
         border: 3px solid black;
     }
 
     .game-index-text {
-        font-size: 20px;
+        font-size: 7vh;
     }
 
     #free-play-button {
-        margin-top: 10px;
+        margin-top: 6vh;
     }
 
     #play-button {
-        margin-top: 15px;
+        margin-top: 6vh;
     }
 }
 
 @media (orientation: portrait) and (max-width: 2000px) {
     .light-button {
-        font-size: 30px;
-        width: 300px;
-        height: 150px;
-        border-radius: 100px;
+        font-size: 4vh;
+        width: 40vh;
+        height: 19vh;
+        border-radius: 10vh;
     }
 
     .game-index-text {
-        font-size: 40px;
-        margin-top: 30px;
+        font-size: 4vh;
+        margin-top: 3vh;
     }
 
     #free-play-button {
-        margin-top: 125px;
+        margin-top: 12vh;
     }
 
     #play-button {
-        margin-top: 100px;
+        margin-top: 12vh;
     }
 }

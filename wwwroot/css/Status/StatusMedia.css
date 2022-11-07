@@ -1,0 +1,96 @@
+﻿@media (orientation: landscape) and (max-width: 1920px) {
+    .figure-block {
+        display: inline-flex;
+        margin-top: 3vh;
+    }
+
+    .light-button {
+        width: 40vh;
+        height: 20vh;
+        font-size: 4vh;
+        margin-top: 3vh;
+        border-radius: 10vh;
+    }
+
+    .circle {
+        font-size: 3vh;
+        width: 20vh;
+        height: 20vh;
+        border: 3px solid black;
+        border-radius: 10vh;
+        margin: 1vh;
+    }
+
+    #status-text {
+        margin: 4vh;
+    }
+}
+
+@media (orientation: landscape) and (max-width: 1200px) {
+    .figure-block {
+        display: inline-flex;
+        margin-top: 1vh;
+    }
+
+    h2 {
+        font-size: 5vh;
+    }
+
+    h4 {
+        font-size: 4vh;
+    }
+
+    h5 {
+        font-size: 3vh;
+    }
+
+    .light-button {
+        width: 40vh;
+        height: 20vh;
+        font-size: 5vh;
+        margin-top: 1vh;
+        border: 3px solid black;
+        border-radius: 10vh;
+    }
+
+    .circle {
+        font-size: 6vh;
+        width: 20vh;
+        height: 20vh;
+        border: 2px solid black;
+        border-radius: 10vh;
+        margin: 2px;
+    }
+
+    #status-text {
+        margin: 1vh;
+    }
+}
+
+@media (orientation: portrait) and (max-width: 2000px) {
+    .figure-block {
+        display: inline-flex;
+        margin-top: 3vh;
+    }
+
+    .light-button {
+        width: 30vh;
+        height: 15vh;
+        font-size: 3vh;
+        margin-top: 3vh;
+        border-radius: 10vh;
+    }
+
+    .circle {
+        font-size: 3vh;
+        width: 13vh;
+        height: 13vh;
+        border: 3px solid black;
+        border-radius: 10vh;
+        margin: 1vh;
+    }
+
+    #status-text {
+        margin: 4vh;
+    }
+}

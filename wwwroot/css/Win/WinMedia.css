@@ -1,80 +1,80 @@
 ﻿@media (orientation: landscape) and (max-width: 1920px) {
     .light-button {
-        width: 400px;
-        height: 200px;
-        font-size: 40px;
-        margin-top: 30px;
+        width: 40vh;
+        height: 20vh;
+        font-size: 4vh;
+        margin-top: 2vh;
     }
 
     #status-text {
-        margin: 40px;
+        margin: 4vh;
     }
 
     h2 {
-        margin: 20px;
+        margin: 2vh;
     }
 
     h3 {
-        font-size: 25px;
+        font-size: 3vh;
     }
 
     #win-icon {
-        width: 400px;
-        height: 400px;
+        width: 45vh;
+        height: 45vh;
     }
 }
 
 @media (orientation: landscape) and (max-width: 1200px) {
     .light-button {
-        width: 150px;
-        height: 75px;
-        font-size: 20px;
-        margin: 0px;
+        width: 45vh;
+        height: 20vh;
+        font-size: 5vh;
+        margin: 0;
         border: 3px solid black;
     }
 
     #status-text {
-        margin: 6px;
+        margin: 3vh;
     }
 
     h2 {
-        font-size: 20px;
-        margin: 6px;
+        font-size: 5vh;
+        margin: 1vh;
     }
 
     h3 {
-        font-size: 20px;
-        margin: 6px;
+        font-size: 4vh;
+        margin: 1vh;
     }
 
     #win-icon {
-        width: 125px;
-        height: 125px;
+        width: 33vh;
+        height: 33vh;
     }
 }
 
 @media (orientation: portrait) and (max-width: 2000px) {
     .light-button {
-        width: 300px;
-        height: 150px;
-        font-size: 30px;
-        margin-top: 30px;
+        width: 35vh;
+        height: 17vh;
+        font-size: 4vh;
+        margin-top: 3vh;
     }
 
     #status-text {
-        margin: 20px;
+        margin: 2vh;
     }
 
     h2 {
-        margin: 15px;
+        margin: 2vh;
     }
 
     h3 {
-        font-size: 25px;
+        font-size: 21px;
     }
 
     #win-icon {
-        width: 300px;
-        height: 300px;
+        width: 35vh;
+        height: 35vh;
     }
 }

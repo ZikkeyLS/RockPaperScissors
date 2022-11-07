@@ -1,47 +1,47 @@
 ﻿@media (orientation: landscape) and (max-width: 1920px) {
     .light-button {
-        font-size: 40px;
-        width: 400px;
-        height: 200px;
-        border-radius: 100px;
-        margin-top: 200px;
+        font-size: 4vh;
+        width: 40vh;
+        height: 20vh;
+        border-radius: 10vh;
+        margin-top: 20vh;
     }
 
     h2 { 
-        font-size: 35px;
-        margin-top: 400px;
+        font-size: 3vh;
+        margin-top: 40vh;
     }
 }
 
 @media (orientation: landscape) and (max-width: 1200px) {
     .light-button {
-        font-size: 20px;
-        width: 150px;
-        height: 80px;
-        margin-left: 200px;
-        margin-right: 200px;
-        border-radius: 100px;
+        font-size: 5vh;
+        width: 40vh;
+        height: 18vh;
+        margin-left: 20vh;
+        margin-right: 20vh;
+        border-radius: 10vh;
         border: 3px solid black;
-        margin-top: 60px;
+        margin-top: 23vh;
     }
 
     h2 {
-        font-size: 20px;
-        margin-top: 100px;
+        font-size: 5vh;
+        margin-top: 27vh;
     }
 }
 
 @media (orientation: portrait) and (max-width: 2000px) {
     .light-button {
-        font-size: 40px;
-        width: 300px;
-        height: 150px;
-        border-radius: 100px;
-        margin-top: 200px;
+        font-size: 5vh;
+        width: 35vh;
+        height: 20vh;
+        border-radius: 10vh;
+        margin-top: 25vh;
     }
 
     h2 {
-        font-size: 35px;
-        margin-top: 200px;
+        font-size: 4vh;
+        margin-top: 30vh;
     }
 }
