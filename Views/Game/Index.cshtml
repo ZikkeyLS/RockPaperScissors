@@ -7,22 +7,22 @@
 @section Scripts {
 <script type="text/javascript">
 
-function disconnect()
-{
-    $.ajax({
-    type:"POST",
-    url: "@Url.Action("Disconnect")",
-    dataType: "action",
-    success: function(result){
-    console.log(result);
-    },
-    error: function(request, status, error){
-    console.log(status);
-    },
-    });
-}
-
-window.onunload = disconnect;
+    function disconnect()
+    {
+        $.ajax({
+        type:"POST",
+        url: "@Url.Action("Disconnect")",
+        dataType: "action",
+        success: function(result){
+        console.log(result);
+        },
+        error: function(request, status, error){
+        console.log(status);
+        },
+        });
+    }
+    
+    window.onunload = disconnect;
 </script>
 
 <script type="text/javascript">
@@ -30,17 +30,18 @@ window.onunload = disconnect;
 
     function proveAuth()
     {
-            $.ajax({
-    type:"POST",
-    url: "@Url.Action("ProveAuth")",
-    dataType: "action",
-    success: function(result){
-    console.log(result);
-    },
-    error: function(request, status, error){
-    console.log(status);
-    },
-    });
+        $.ajax({
+        type: "POST",
+        url: "@Url.Action("ProveAuth")",
+        contentType: false,
+        processData: false,
+        async: false,
+        success: function(result) {
+            if (result) {
+                $('body').html(result);
+            }
+        },
+        });
     }
 </script>
 }

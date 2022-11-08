@@ -85,5 +85,24 @@ namespace RockPaperScissors.DB
 
             return task.Result;
         }
+
+        public int CreateChangeRequest(string tableName, Value valueToChange)
+        {
+            MySqlConnection connection = new(_connectionData);
+            _ = connection.OpenAsync();
+
+            string? finalValue = valueToChange.Type == "string" ? "'" + valueToChange.Result.ToString()?.Replace(" ", "") + "'" : valueToChange.Result.ToString()?.Replace(" ", "");
+
+            string sqlRequest = $"UPDATE `{tableName}` SET `{valueToChange.Name}` = {finalValue}";
+
+            MySqlCommand command = new(sqlRequest, connection);
+
+            Task<int> task = command.ExecuteNonQueryAsync();
+
+            _ = connection.CloseAsync();
+            _ = connection.DisposeAsync();
+
+            return task.Result;
+        }
     }
 }

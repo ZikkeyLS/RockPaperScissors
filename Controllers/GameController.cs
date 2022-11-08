@@ -63,15 +63,17 @@ namespace RockPaperScissors.Controllers
 
         public IActionResult ProveAuth()
         {
-            return Json(!CheckAuth());
+            if(!CheckAuth())
+                return RedirectToAction("Index", "Home", new { });
+
+            return Ok();
         }
 
         public bool CheckAuth()
         {
             string userAgent = Request.Headers.UserAgent.ToString();
             HttpContext.Session.SetString("user_agent", userAgent);
-            
-
+           
             int? userId = HttpContext.Session.GetInt32("user_id");
 
             if (userId != null)
