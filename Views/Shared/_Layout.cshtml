@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/RockPaperScissors.styles.css" asp-append-version="true" />
 </head>
 <body>
+    @Html.Raw(TempData["msg"])
      
     @RenderBody()
 

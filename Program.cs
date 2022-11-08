@@ -7,8 +7,19 @@ namespace RockPaperScissors
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddDistributedMemoryCache();
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10000);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+
 
             var app = builder.Build();
 
@@ -24,6 +35,7 @@ namespace RockPaperScissors
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

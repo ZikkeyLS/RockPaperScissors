@@ -4,6 +4,47 @@
 
 <link rel="stylesheet" href="~/css/Win/WinMedia.css" asp-append-version="true" />
 
+@section Scripts {
+<script type="text/javascript">
+
+function disconnect()
+{
+    $.ajax({
+    type:"POST",
+    url: "@Url.Action("Disconnect")",
+    dataType: "action",
+    success: function(result){
+    console.log(result);
+    },
+    error: function(request, status, error){
+    console.log(status);
+    },
+    });
+}
+
+window.onunload = disconnect;
+</script>
+
+<script type="text/javascript">
+    document.onload = proveAuth();
+
+    function proveAuth()
+    {
+            $.ajax({
+    type:"POST",
+    url: "@Url.Action("ProveAuth")",
+    dataType: "action",
+    success: function(result){
+    console.log(result);
+    },
+    error: function(request, status, error){
+    console.log(status);
+    },
+    });
+    }
+</script>
+}
+
 <section class="d-flex flex-column justify-content-center align-items-center">
     <div class="container">
         <div class="row justify-content-center">
