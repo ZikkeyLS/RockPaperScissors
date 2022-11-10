@@ -63,10 +63,61 @@ namespace RockPaperScissors.Controllers
 
         public IActionResult ProveAuth()
         {
-            if(!CheckAuth())
+            if (CheckBanned())
+                return RedirectToAction("Index", "Home", new { });
+
+            if (!CheckAuth())
                 return RedirectToAction("Index", "Home", new { });
 
             return Ok();
+        }
+
+        public IActionResult Disconnect()
+        {
+            int? userId = HttpContext.Session.GetInt32("user_id");
+            string? userAgent = HttpContext.Session.GetString("user_agent");
+
+            if (userId != null && userAgent != null)
+            {
+                DataRowCollection dataRow = _database.CreateGetRequest("users", new FlexibleDB.Value[1] { new FlexibleDB.Value("id", userId) });
+
+                object? loggedIn = dataRow[0][5];
+
+                if (loggedIn != null)
+                {
+                    string loggedInDevice = (string)loggedIn;
+
+                    if (loggedInDevice == userAgent.Replace(" ", ""))
+                        _database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", ""), new FlexibleDB.Value("id", userId));
+                }
+            }
+
+            return Ok();
+        }
+
+        public bool CheckBanned()
+        {
+            int? userId = HttpContext.Session.GetInt32("user_id");
+
+            if (userId != null)
+            {
+                DataRowCollection dataRow = _database.CreateGetRequest("users", new FlexibleDB.Value[1] { new FlexibleDB.Value("id", userId) });
+
+                object? banned = dataRow[0][4];
+
+                if (banned != null)
+                {
+                    return (int)banned != 0;
+                }
+            }
+            else
+            {
+                // Error
+
+                return false;
+            }
+
+            return true;
         }
 
         public bool CheckAuth()
@@ -114,42 +165,6 @@ namespace RockPaperScissors.Controllers
 
                 return false;
             }
-        }
-
-        public IActionResult Disconnect()
-        {
-            int? userId = HttpContext.Session.GetInt32("user_id");
-            string? userAgent = HttpContext.Session.GetString("user_agent");
-
-            if(userId != null && userAgent != null)
-            {
-                DataRowCollection dataRow = _database.CreateGetRequest("users", new FlexibleDB.Value[1] { new FlexibleDB.Value("id", userId) });
-
-                object? loggedIn = dataRow[0][5];
-
-                if (loggedIn != null)
-                {
-                    string loggedInDevice = (string)loggedIn;
-
-                    if (loggedInDevice == userAgent.Replace(" ", ""))
-                    {
-                        _database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", ""), new FlexibleDB.Value("id", userId));
-                    }
-                }
-            }
-
-            return Ok();
-        }
-
-        public void SetReusableTempData(string key, object? value)
-        {
-            TempData[key] = value;
-        }
-
-        public void GetReusableTempData(string key, out object? value)
-        {
-            value = TempData[key];
-            SetReusableTempData(key, value);
         }
     }
 }

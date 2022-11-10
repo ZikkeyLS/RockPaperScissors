@@ -5,44 +5,11 @@
 <link rel="stylesheet" href="~/css/Status/StatusMedia.css" asp-append-version="true" />
 
 @section Scripts {
-<script type="text/javascript">
-
-function disconnect()
-{
-    $.ajax({
-    type:"POST",
-    url: "@Url.Action("Disconnect")",
-    dataType: "action",
-    success: function(result){
-    console.log(result);
-    },
-    error: function(request, status, error){
-    console.log(status);
-    },
-    });
-}
-
-window.onunload = disconnect;
-</script>
-
-<script type="text/javascript">
-    document.onload = proveAuth();
-
-    function proveAuth()
-    {
-            $.ajax({
-    type:"POST",
-    url: "@Url.Action("ProveAuth")",
-    dataType: "action",
-    success: function(result){
-    console.log(result);
-    },
-    error: function(request, status, error){
-    console.log(status);
-    },
-    });
-    }
-</script>
+    <script src=~/js/ajaxRequests.js type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onunload = function() { ajaxRequest("@Url.Action("Disconnect")"); };
+        window.onload = function() { ajaxRequest("@Url.Action("ProveAuth")"); };
+    </script>
 }
 
 <section class="d-flex flex-column justify-content-center align-items-center">
@@ -53,17 +20,17 @@ window.onunload = disconnect;
                 <h2>Победитель: Zikkey</h2>
                 <div class="figure-block">
                     <div>
-                        <img class="circle" src="/images/tutorial.png" alt="ChoiceA"/>
                         <h4>Zikkey</h4>
+                        <img class="circle" src="/images/RawCirclesNamed/Hands_710_01.png" alt="ChoiceA"/>
                          <h5>Победитель</h5>
                     </div>
                     <div>
-                        <img class="circle" src="/images/tutorial.png" alt="ChoiceA"/>
                         <h4>Zikkey2</h4>
+                        <img class="circle" src="/images/RawCirclesNamed/Hands_710_02.png" alt="ChoiceB"/>
                     </div>
                     <div>
-                        <img class="circle" src="/images/tutorial.png" alt="ChoiceA"/>
                         <h4>Zikkey3</h4>
+                        <img class="circle" src="/images/RawCirclesNamed/Hands_710_03.png" alt="ChoiceC"/>
                     </div>
                 </div>
                 <h2 id="status-text">Вы выиграли!</h2>

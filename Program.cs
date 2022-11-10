@@ -7,7 +7,7 @@ namespace RockPaperScissors
         public static void Main(string[] args)
         {
             SetupASP(args);
-            FlexibleDB db = new FlexibleDB("rock_paper_scissors");
+            FlexibleDB db = new("rock_paper_scissors");
             db.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", ""));
 
             Console.ReadLine();

@@ -5,44 +5,11 @@
 <link rel="stylesheet" href="~/css/LevelSelector/LevelSelectorMedia.css" asp-append-version="true" />
 
 @section Scripts {
-<script type="text/javascript">
-
-function disconnect()
-{
-    $.ajax({
-    type:"POST",
-    url: "@Url.Action("Disconnect")",
-    dataType: "action",
-    success: function(result){
-    console.log(result);
-    },
-    error: function(request, status, error){
-    console.log(status);
-    },
-    });
-}
-
-window.onunload = disconnect;
-</script>
-
-<script type="text/javascript">
-    document.onload = proveAuth();
-
-    function proveAuth()
-    {
-            $.ajax({
-    type:"POST",
-    url: "@Url.Action("ProveAuth")",
-    dataType: "action",
-    success: function(result){
-    console.log(result);
-    },
-    error: function(request, status, error){
-    console.log(status);
-    },
-    });
-    }
-</script>
+    <script src=~/js/ajaxRequests.js type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onbeforeunload = function() { proveAuth("@Url.Action("Disconnect")"); };
+        window.onload = function() { disconnect("@Url.Action("ProveAuth")"); };
+    </script>
 }
 
 <div class="text-center">

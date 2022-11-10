@@ -5,44 +5,11 @@
 <link rel="stylesheet" href="~/css/Win/WinMedia.css" asp-append-version="true" />
 
 @section Scripts {
-<script type="text/javascript">
-
-function disconnect()
-{
-    $.ajax({
-    type:"POST",
-    url: "@Url.Action("Disconnect")",
-    dataType: "action",
-    success: function(result){
-    console.log(result);
-    },
-    error: function(request, status, error){
-    console.log(status);
-    },
-    });
-}
-
-window.onunload = disconnect;
-</script>
-
-<script type="text/javascript">
-    document.onload = proveAuth();
-
-    function proveAuth()
-    {
-            $.ajax({
-    type:"POST",
-    url: "@Url.Action("ProveAuth")",
-    dataType: "action",
-    success: function(result){
-    console.log(result);
-    },
-    error: function(request, status, error){
-    console.log(status);
-    },
-    });
-    }
-</script>
+    <script src=~/js/ajaxRequests.js type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onunload = function() { ajaxRequest("@Url.Action("Disconnect")"); };
+        window.onload = function() { ajaxRequest("@Url.Action("ProveAuth")"); };
+    </script>
 }
 
 <section class="d-flex flex-column justify-content-center align-items-center">
@@ -51,8 +18,8 @@ window.onunload = disconnect;
             <div class="col-lg-6 text-center">
                 <h2>2000 баллов</h2>
                 <h2>Уровень: 5</h2>
-                <img id="win-icon" src="/images/tutorial.png" alt="win-icon"/>
-                <h3 id="status-text">Поздравляем, награда - 10 баллов.</h3>
+                <h2>Награда - 100 баллов</h2>
+                <image src="/images/SameSize/Win_000.png" id="win-icon" />
                 <button class="light-button">Продолжить</button>
             </div>
         </div>

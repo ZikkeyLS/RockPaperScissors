@@ -14,10 +14,8 @@
 
     .circle {
         font-size: 3vh;
-        width: 20vh;
-        height: 20vh;
-        border: 4px solid black;
-        border-radius: 10vh;
+        width: 25vh;
+        height: 25vh;
         position: inherit;
         display: inline-block;
         margin: 1vh;
@@ -42,8 +40,6 @@
         font-size: 3vh;
         width: 20vh;
         height: 20vh;
-        border: 4px solid black;
-        border-radius: 10vh;
         position: inherit;
         display: inline-block;
         margin: 1vh;
@@ -72,8 +68,6 @@
         font-size: 3vh;
         width: 25vh;
         height: 25vh;
-        border: 2px solid black;
-        border-radius: 15vh;
         position: inherit;
         display: inline-block;
         margin: 1vh;
