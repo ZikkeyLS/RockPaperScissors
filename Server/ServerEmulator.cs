@@ -96,6 +96,24 @@ namespace RockPaperScissors.Server
                 queue.Add(player);
         }
 
+        public static bool PlayerInQueue(Player player)
+        {
+            return queue.Contains(player);
+        }
+
+        public static Round GetPlayerRound(Player player)
+        {
+            for(int i = 0; i < rounds.Count; i++)
+            {
+                Round round = rounds[i];
+
+                if (round.ContainsPlayer(player))
+                    return round;
+            }
+
+            return null;
+        }
+
         public static void RemoveFromQueue(int id)
         {
             Player player = players.Find((element) => element.Id == id);
@@ -130,6 +148,11 @@ namespace RockPaperScissors.Server
         {
             rounds.Remove(round);
             round.Dispose();
+        }
+
+        public static Player GetPlayer(int id)
+        {
+            return players.Find((player) => player.Id == id);
         }
     }
 }

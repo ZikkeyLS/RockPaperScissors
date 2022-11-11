@@ -167,8 +167,10 @@ namespace RockPaperScissors.Controllers
             return true;
         }
 
-        public JsonResult SendQueueRequest(int id, byte level)
+        public JsonResult SendQueueRequest(byte level)
         {
+            int id = (int)HttpContext.Session.GetInt32("user_id");
+
             DataRowCollection playerData = ServerEmulator.Database.CreateGetRequest("users", new FlexibleDB.Value[] { new FlexibleDB.Value("id", id) });
 
             string status;
@@ -187,14 +189,52 @@ namespace RockPaperScissors.Controllers
             return Json(new QueueRequest(status));
         }
 
-        public JsonResult GetQueueStatus()
+        public JsonResult SendInput(int input) 
         {
+            int id = (int)HttpContext.Session.GetInt32("user_id");
 
+            Player player = ServerEmulator.GetPlayer(id);
+            Round round = ServerEmulator.GetPlayerRound(player);
+
+            string status;
+
+            if(round == null || player == null)
+            {
+                status = "fake data";
+
+            }
+            else
+            {
+                status = "all working";
+                round.AddPlayerInput(player, input);
+            }
+
+            return Json(new Input(status));
+        }
+
+        public IActionResult GetQueueStatus()
+        {
+            int id = (int)HttpContext.Session.GetInt32("user_id");
+
+            string status;
+
+            Player player = ServerEmulator.GetPlayer(id);
+            Round round = ServerEmulator.GetPlayerRound(player);
+
+            if (ServerEmulator.PlayerInQueue(player))
+                status = "inQueue";
+            else if (round != null)
+                return RedirectToAction("Round", "Game");
+            else
+                status = "fakeData";
+
+            return Ok(status);
         }
 
         public JsonResult GetRoundStatus()
         {
-
+            int id = (int)HttpContext.Session.GetInt32("user_id");
+            // If win - win data. If lose - lose data. If tie - redirect data or cancelation data.
         }
     }
 }
