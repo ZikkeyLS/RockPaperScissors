@@ -4,8 +4,7 @@ namespace RockPaperScissors.Server
 {
     public class Round : IDisposable
     {
-        [Flags]
-        public enum Status : int
+        public enum Status : byte
         {
             readress = 0,
             waiting,
@@ -14,7 +13,7 @@ namespace RockPaperScissors.Server
             initialized
         }
 
-        public enum Figure : int 
+        public enum Figure : byte
         {
             Rock = 0,
             Paper,
@@ -50,7 +49,7 @@ namespace RockPaperScissors.Server
             }
         }
 
-        private static List<FigureStatus> figureStatuses = new(7)
+        private static readonly List<FigureStatus> figureStatuses = new(7)
         {
             new FigureStatus(Figure.Rock, new Figure[3] { Figure.Paper, Figure.Air, Figure.Water }),
             new FigureStatus(Figure.Paper, new Figure[3] { Figure.Fire, Figure.Scissors, Figure.Sponge }),
@@ -72,6 +71,10 @@ namespace RockPaperScissors.Server
         private int _score = 0;
 
         private Status _status = Status.initialized;
+
+        public Status GameStatus => _status;
+        public Player[] Winners => _winners.ToArray();
+        public bool HasWinner => Winners != null;
 
         public Round(Player[] players)
         {
@@ -165,6 +168,8 @@ namespace RockPaperScissors.Server
                     }
                 }
 
+                _status = Status.complete;
+
                 Thread.Sleep(30000);
                 ServerEmulator.RemoveRound(this);
             });
@@ -181,19 +186,9 @@ namespace RockPaperScissors.Server
             _inputsCount += 1;
         }
 
-        public void Readress()
-        {
-            Open(_players, _waitSeconds, _level);
-        }
-
         public void Dispose()
         {
             GC.SuppressFinalize(this);
         }
-
-        public Status GameStatus => _status;
-
-        public Player[] Winners => _winners.ToArray();
-        public bool HasWinner => Winners != null;
     }
 }
