@@ -64,6 +64,26 @@ namespace RockPaperScissors.DB
             return table.Rows;
         }
 
+        public DataRowCollection CreateGetRequest(string tableName)
+        {
+            DataTable table = new();
+            MySqlDataAdapter adapter = new();
+            MySqlConnection connection = new(_connectionData);
+            _ = connection.OpenAsync();
+
+            string sqlRequest = $"SELECT * FROM `{tableName}`";
+
+            MySqlCommand command = new(sqlRequest, connection);
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+
+            _ = connection.CloseAsync();
+            _ = connection.DisposeAsync();
+
+            return table.Rows;
+        }
+
+
         public int CreateChangeRequest(string tableName, Value valueToChange, Value valueToCheck)
         {
             MySqlConnection connection = new(_connectionData);

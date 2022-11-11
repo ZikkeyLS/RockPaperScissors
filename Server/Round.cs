@@ -1,4 +1,6 @@
-﻿namespace RockPaperScissors.Server
+﻿using System.Data;
+
+namespace RockPaperScissors.Server
 {
     public class Round : IDisposable
     {
@@ -7,7 +9,9 @@
         {
             readress = 0,
             waiting,
-            complete
+            complete,
+            denied,
+            initialized
         }
 
         public enum Figure : int 
@@ -59,35 +63,40 @@
 
         private Player[] _players = new Player[3];
         private List<Player> _winners;
-        private int _playersCount = 0;
 
         private PlayerInput[] _inputs = new PlayerInput[3];
         private int _inputsCount = 0;
 
         private int _waitSeconds = 5;
-        private int _level = 0;
+        private byte _level = 0;
+        private int _score = 0;
 
-        private Round _readressRound;
-        private Status _status;
+        private Status _status = Status.initialized;
 
         public Round(Player[] players)
         {
             _players = players;
         }
 
-        public async void Open(Player[] players, int waitSeconds, int level)
+        public async void Open(Player[] players, int waitSeconds, byte level)
         {
             _players = players;
             _waitSeconds = waitSeconds;
-            _level = level;
 
-            _status = Status.waiting;
+            _level = level;
+            _score = ServerEmulator.LevelTable[level];
+
+
 
             await Task.Factory.StartNew(() =>
             {
+                if (_status == Status.readress)
+                    Thread.Sleep(5000);
+
+                _status = Status.waiting;
                 Thread.Sleep(_waitSeconds * 1000);
 
-                List<PlayerInput> checkedInputs = new List<PlayerInput>();
+                List<PlayerInput> checkedInputs = new();
 
                 for (int i = 0; i < _inputs.Length; i++)
                     if (_inputs != null)
@@ -125,17 +134,18 @@
 
                 if (nonCount != 0 && loserCount == 0)
                 {
-                    // Stop game
+                    _status = Status.denied;
                     return;
                 }
 
                 if (loserCount == 0 && nonCount == 0)
                 {
-                    // Rerun round
+                    _status = Status.readress;
+                    Open(players, waitSeconds, level);
                     return;
                 }
 
-                for(int i = 0; i < checkedInputs.Count; i++)
+                for (int i = 0; i < checkedInputs.Count; i++)
                 {
                     PlayerInput input = checkedInputs[i];
 
@@ -145,17 +155,24 @@
                             _winners = new List<Player>();
 
                         _winners.Add(input.Player);
-                        // give points
+                        DataRowCollection collection = ServerEmulator.Database.CreateGetRequest("users", new DB.FlexibleDB.Value[] { new DB.FlexibleDB.Value("id", input.Player.Id) });
+                        ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", ((int)collection[0][2]) + _score));
                     }
                     else
                     {
-                        // remove points
+                        DataRowCollection collection = ServerEmulator.Database.CreateGetRequest("users", new DB.FlexibleDB.Value[] { new DB.FlexibleDB.Value("id", input.Player.Id) });
+                        ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", Math.Clamp((int)collection[0][2] - _score, 0, 9999)));
                     }
                 }
 
                 Thread.Sleep(30000);
                 ServerEmulator.RemoveRound(this);
             });
+        }
+
+        public bool ContainsPlayer(Player player)
+        {
+            return _players.Contains(player);
         }
 
         public void AddPlayerInput(Player player, int value)
@@ -175,9 +192,6 @@
         }
 
         public Status GameStatus => _status;
-
-        public Round ReadressRound => _readressRound;
-        public bool NeedReadress => _readressRound != null;
 
         public Player[] Winners => _winners.ToArray();
         public bool HasWinner => Winners != null;

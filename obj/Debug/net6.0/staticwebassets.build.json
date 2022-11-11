@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Jzirm/a5myNL6dp/0K2zA4WGFWI1QiXhSQKguC0TrQg=",
+  "Hash": "UpHVkBl14LizCBErTdh9M4UlYou3hBq4a56MbEFzgh4=",
   "Source": "RockPaperScissors",
   "BasePath": "_content/RockPaperScissors",
   "Mode": "Default",
@@ -729,6 +729,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\SameSize\\Hands_07.png"
+    },
+    {
+      "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\images\\SameSize\\Win_000.png",
+      "SourceId": "RockPaperScissors",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\",
+      "BasePath": "_content/RockPaperScissors",
+      "RelativePath": "images/SameSize/Win_000.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\SameSize\\Win_000.png"
     },
     {
       "Identity": "D:\\Projects\\CSharp\\Заказ-RockPaperScissors\\RockPaperScissors\\wwwroot\\js\\ajaxRequests.js",

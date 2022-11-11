@@ -1,4 +1,5 @@
 using RockPaperScissors.DB;
+using RockPaperScissors.Server;
 
 namespace RockPaperScissors
 {
@@ -7,9 +8,9 @@ namespace RockPaperScissors
         public static void Main(string[] args)
         {
             SetupASP(args);
-            FlexibleDB db = new("rock_paper_scissors");
-            db.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", ""));
 
+            ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", ""));
+           
             Console.ReadLine();
         }
 

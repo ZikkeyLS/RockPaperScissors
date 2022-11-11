@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RockPaperScissors.DB;
 using RockPaperScissors.Models;
+using RockPaperScissors.Server;
 using System.Data;
 using System.Diagnostics;
 
@@ -9,12 +10,10 @@ namespace RockPaperScissors.Controllers
     public class GameController : Controller
     {
         private readonly ILogger<GameController> _logger;
-        private readonly FlexibleDB _database;
 
         public GameController(ILogger<GameController> logger)
         {
             _logger = logger;
-            _database = new FlexibleDB("rock_paper_scissors");
         }
 
         public IActionResult Index(int id, string username)
@@ -79,7 +78,7 @@ namespace RockPaperScissors.Controllers
 
             if (userId != null && userAgent != null)
             {
-                DataRowCollection dataRow = _database.CreateGetRequest("users", new FlexibleDB.Value[1] { new FlexibleDB.Value("id", userId) });
+                DataRowCollection dataRow = ServerEmulator.Database.CreateGetRequest("users", new FlexibleDB.Value[1] { new FlexibleDB.Value("id", userId) });
 
                 object? loggedIn = dataRow[0][5];
 
@@ -88,7 +87,7 @@ namespace RockPaperScissors.Controllers
                     string loggedInDevice = (string)loggedIn;
 
                     if (loggedInDevice == userAgent.Replace(" ", ""))
-                        _database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", ""), new FlexibleDB.Value("id", userId));
+                        ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", ""), new FlexibleDB.Value("id", userId));
                 }
             }
 
@@ -101,7 +100,7 @@ namespace RockPaperScissors.Controllers
 
             if (userId != null)
             {
-                DataRowCollection dataRow = _database.CreateGetRequest("users", new FlexibleDB.Value[1] { new FlexibleDB.Value("id", userId) });
+                DataRowCollection dataRow = ServerEmulator.Database.CreateGetRequest("users", new FlexibleDB.Value[1] { new FlexibleDB.Value("id", userId) });
 
                 object? banned = dataRow[0][4];
 
@@ -129,7 +128,7 @@ namespace RockPaperScissors.Controllers
 
             if (userId != null)
             {
-                DataRowCollection dataRow = _database.CreateGetRequest("users", new FlexibleDB.Value[1] { new FlexibleDB.Value("id", userId) });
+                DataRowCollection dataRow = ServerEmulator.Database.CreateGetRequest("users", new FlexibleDB.Value[1] { new FlexibleDB.Value("id", userId) });
 
                 object? loggedIn = dataRow[0][5];
 
@@ -139,7 +138,7 @@ namespace RockPaperScissors.Controllers
 
                     if (loggedInDevice == "")
                     {
-                        _database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", userAgent), new FlexibleDB.Value("id", userId));
+                        ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", userAgent), new FlexibleDB.Value("id", userId));
                         return true;
                     }
                     else if(loggedInDevice == userAgent.Replace(" ", ""))
@@ -155,7 +154,7 @@ namespace RockPaperScissors.Controllers
                 }
                 else
                 {
-                    _database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", userAgent), new FlexibleDB.Value("id", userId));
+                    ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", userAgent), new FlexibleDB.Value("id", userId));
                     return true;
                 }
             }
