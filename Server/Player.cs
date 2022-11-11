@@ -4,14 +4,13 @@
     {
         public readonly int Id;
         public readonly string Name;
-        public readonly int Score;
-        public byte Level;
+        public readonly byte Level;
 
-        public Player(int id, string name, int score)
+        public Player(int id, string name, byte level)
         {
             Id = id;
             Name = name;
-            Score = score;
+            Level = level;
         }
     }
 }

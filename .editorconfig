@@ -8,3 +8,6 @@ dotnet_diagnostic.CS8618.severity = silent
 
 # CS8602: Разыменование вероятной пустой ссылки.
 dotnet_diagnostic.CS8602.severity = silent
+
+# CS8604: Возможно, аргумент-ссылка, допускающий значение NULL.
+dotnet_diagnostic.CS8604.severity = silent

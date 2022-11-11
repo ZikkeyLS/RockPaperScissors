@@ -4,6 +4,7 @@ using RockPaperScissors.Models;
 using RockPaperScissors.Server;
 using System.Data;
 using System.Diagnostics;
+using RockPaperScissors.JsonModels;
 
 namespace RockPaperScissors.Controllers
 {
@@ -94,6 +95,53 @@ namespace RockPaperScissors.Controllers
             return Ok();
         }
 
+        public bool CheckAuth()
+        {
+            string userAgent = Request.Headers.UserAgent.ToString();
+            HttpContext.Session.SetString("user_agent", userAgent);
+
+            int? userId = HttpContext.Session.GetInt32("user_id");
+
+            if (userId != null)
+            {
+                DataRowCollection dataRow = ServerEmulator.Database.CreateGetRequest("users", new FlexibleDB.Value[1] { new FlexibleDB.Value("id", userId) });
+
+                object? loggedIn = dataRow[0][5];
+
+                if (loggedIn != null)
+                {
+                    string loggedInDevice = (string)loggedIn;
+
+                    if (loggedInDevice == "")
+                    {
+                        ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", userAgent), new FlexibleDB.Value("id", userId));
+                        return true;
+                    }
+                    else if (loggedInDevice == userAgent.Replace(" ", ""))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        // Error
+
+                        return false;
+                    }
+                }
+                else
+                {
+                    ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", userAgent), new FlexibleDB.Value("id", userId));
+                    return true;
+                }
+            }
+            else
+            {
+                // Error
+
+                return false;
+            }
+        }
+
         public bool CheckBanned()
         {
             int? userId = HttpContext.Session.GetInt32("user_id");
@@ -119,51 +167,34 @@ namespace RockPaperScissors.Controllers
             return true;
         }
 
-        public bool CheckAuth()
+        public JsonResult SendQueueRequest(int id, byte level)
         {
-            string userAgent = Request.Headers.UserAgent.ToString();
-            HttpContext.Session.SetString("user_agent", userAgent);
-           
-            int? userId = HttpContext.Session.GetInt32("user_id");
+            DataRowCollection playerData = ServerEmulator.Database.CreateGetRequest("users", new FlexibleDB.Value[] { new FlexibleDB.Value("id", id) });
 
-            if (userId != null)
+            string status;
+
+            if ((int)playerData[0][2] >= ServerEmulator.LevelTable[level])
             {
-                DataRowCollection dataRow = ServerEmulator.Database.CreateGetRequest("users", new FlexibleDB.Value[1] { new FlexibleDB.Value("id", userId) });
-
-                object? loggedIn = dataRow[0][5];
-
-                if(loggedIn != null)
-                {
-                    string loggedInDevice = (string)loggedIn;
-
-                    if (loggedInDevice == "")
-                    {
-                        ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", userAgent), new FlexibleDB.Value("id", userId));
-                        return true;
-                    }
-                    else if(loggedInDevice == userAgent.Replace(" ", ""))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        // Error
-
-                        return false;
-                    }
-                }
-                else
-                {
-                    ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", userAgent), new FlexibleDB.Value("id", userId));
-                    return true;
-                }
+                status = "success";
+                ServerEmulator.AddPlayer(id, playerData[0][1].ToString(), level);
+                ServerEmulator.AddToQueue(id);
             }
             else
             {
-                // Error
-
-                return false;
+                status = "fake data";
             }
+
+            return Json(new QueueRequest(status));
+        }
+
+        public JsonResult GetQueueStatus()
+        {
+
+        }
+
+        public JsonResult GetRoundStatus()
+        {
+
         }
     }
 }

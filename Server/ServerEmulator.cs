@@ -11,32 +11,6 @@ namespace RockPaperScissors.Server
 
         public static bool Running { get; private set; } = true;
 
-        public static readonly Dictionary<byte, byte> ScoreTable = new() 
-        {
-            // Score => Level
-            { 200, 20 },
-            { 150, 19 },
-            { 125, 18 },
-            { 110, 17 },
-            { 105, 16 },
-            { 100, 15 },
-            { 95, 14 },
-            { 90, 13 },
-            { 84, 12 },
-            { 78, 11 },
-            { 72, 10 },
-            { 64, 9 },
-            { 48, 8 },
-            { 32, 7 },
-            { 24, 6 },
-            { 16, 5 },
-            { 8, 4 },
-            { 4, 3 },
-            { 2, 2 },
-            { 1, 1 },
-            { 1, 0 }
-        };
-
         public static readonly Dictionary<byte, byte> LevelTable = new()
         {
             // Level => Score
@@ -62,7 +36,6 @@ namespace RockPaperScissors.Server
             { 1, 1 },
             { 0, 1 }
         };
-
 
         public static async void RunCycle()
         {
@@ -119,10 +92,6 @@ namespace RockPaperScissors.Server
         {
             Player player = players.Find((element) => element.Id == id);
 
-            foreach(byte value in LevelTable.Keys)
-                if(player.Score > value)
-                    player.Level = LevelTable[value];
-
             if (player != null)
                 queue.Add(player);
         }
@@ -136,9 +105,9 @@ namespace RockPaperScissors.Server
                     players.Remove(player);
         }
 
-        public static void AddPlayer(int id, string name, int score)
+        public static void AddPlayer(int id, string name, byte level)
         {
-            players.Add(new Player(id, name, score));
+            players.Add(new Player(id, name, level));
         }
 
         public static void RemovePlayer(Player player)
