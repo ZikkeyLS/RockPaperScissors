@@ -69,12 +69,14 @@ namespace RockPaperScissors.Server
         private int _waitSeconds = 5;
         private byte _level = 0;
         private int _score = 0;
+        private int _iteration = 0;
 
         private Status _status = Status.initialized;
 
         public Status GameStatus => _status;
         public Player[] Winners => _winners.ToArray();
         public bool HasWinner => Winners != null;
+        public int Iteration => _iteration;
 
         public Round(Player[] players)
         {
@@ -144,6 +146,7 @@ namespace RockPaperScissors.Server
                 if (loserCount == 0 && nonCount == 0)
                 {
                     _status = Status.readress;
+                    _iteration += 1;
                     Open(players, waitSeconds, level);
                     return;
                 }
