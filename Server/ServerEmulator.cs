@@ -1,13 +1,15 @@
 ﻿using RockPaperScissors.DB;
+using RockPaperScissors.Server.Components;
 
 namespace RockPaperScissors.Server
 {
     public static class ServerEmulator
     {
-        private readonly static List<Player> players = new();
-        private readonly static List<Player> queue = new();
-        private readonly static List<Round> rounds = new();
         public readonly static FlexibleDB Database = new("rock_paper_scissors");
+
+        public readonly static QueueComponent Queue = new();
+        public readonly static PlayersComponent Players = new();
+        public readonly static RoundsComponent Rounds = new();
 
         public static bool Running { get; private set; } = true;
 
@@ -45,13 +47,13 @@ namespace RockPaperScissors.Server
                 {
                     Task.Delay(5000);
 
-                    while (queue.Count >= 3)
+                    while (Queue.Lenght >= 3)
                     {
                         Dictionary<byte, List<Player>> sortedLevelTable = new();
 
-                        for (int i = 0; i < queue.Count; i++)
+                        for (int i = 0; i < Queue.Lenght; i++)
                         {
-                            Player player = queue[i];
+                            Player player = Queue.Raw[i];
 
                             if (!sortedLevelTable.ContainsKey(player.Level))
                                 sortedLevelTable.Add(player.Level, new List<Player>());
@@ -67,15 +69,11 @@ namespace RockPaperScissors.Server
                                 Player second = players[1];
                                 Player third = players[2];
 
-                                CreateRound(new Player[] { first, second, third });
+                                Rounds.Create(new Player[] { first, second, third });
 
-                                players.Remove(first);
-                                players.Remove(second);
-                                players.Remove(third);
-
-                                queue.Remove(first);
-                                queue.Remove(second);
-                                queue.Remove(third);
+                                Queue.Remove(first);
+                                Queue.Remove(second);
+                                Queue.Remove(third);
                             }
                         }
                     }
@@ -86,73 +84,6 @@ namespace RockPaperScissors.Server
         public static void StopCycle()
         {
             Running = false;
-        }
-
-        public static void AddToQueue(int id)
-        {
-            Player player = players.Find((element) => element.Id == id);
-
-            if (player != null)
-                queue.Add(player);
-        }
-
-        public static bool PlayerInQueue(Player player)
-        {
-            return queue.Contains(player);
-        }
-
-        public static Round GetPlayerRound(Player player)
-        {
-            for(int i = 0; i < rounds.Count; i++)
-            {
-                Round round = rounds[i];
-
-                if (round.ContainsPlayer(player))
-                    return round;
-            }
-
-            return null;
-        }
-
-        public static void RemoveFromQueue(int id)
-        {
-            Player player = players.Find((element) => element.Id == id);
-
-            if (player != null)
-                if (players.Contains(player))
-                    players.Remove(player);
-        }
-
-        public static void AddPlayer(int id, string name, byte level)
-        {
-            players.Add(new Player(id, name, level));
-        }
-
-        public static void RemovePlayer(Player player)
-        {
-            if (players.Contains(player))
-                players.Remove(player);
-        }
-
-        public static bool ContainsPlayer(Player player)
-        {
-            return players.Contains(player);
-        }
-
-        public static void CreateRound(Player[] players)
-        {
-            rounds.Add(new Round(players));
-        }
-
-        public static void RemoveRound(Round round)
-        {
-            rounds.Remove(round);
-            round.Dispose();
-        }
-
-        public static Player GetPlayer(int id)
-        {
-            return players.Find((player) => player.Id == id);
         }
     }
 }

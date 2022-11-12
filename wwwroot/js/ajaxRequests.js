@@ -38,8 +38,29 @@ function sendQueueRequest(url) {
         processData: false,
         async: false,
         success: function (result) {
-            if (result && window.location.href != result) {
-                window.location.href = result;
+            if (result) {
+                const resultObject = JSON.parse(result);
+
+                if (resultObject.UrlIndex != null)
+                    window.location.href = resultObject.UrlIndex;
+            }
+        },
+    });
+}
+
+function getQueueStatus(url) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        contentType: false,
+        processData: false,
+        async: false,
+        success: function (result) {
+            if (result) {
+                const resultObject = JSON.parse(result);
+
+                if (resultObject.UrlIndex != null)
+                    window.location.href = resultObject.UrlIndex;
             }
         },
     });

@@ -5,6 +5,7 @@ using RockPaperScissors.Server;
 using System.Data;
 using System.Diagnostics;
 using RockPaperScissors.JsonModels;
+using System.Text.Json;
 
 namespace RockPaperScissors.Controllers
 {
@@ -120,6 +121,7 @@ namespace RockPaperScissors.Controllers
                     if (loggedInDevice == "")
                     {
                         ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", userAgent), new FlexibleDB.Value("id", userId));
+                        ServerEmulator.Players.Add(userId.Value, (string)dataRow[0][1]);
                         return true;
                     }
                     else if (loggedInDevice == userAgent.Replace(" ", ""))
@@ -178,25 +180,58 @@ namespace RockPaperScissors.Controllers
 
             DataRowCollection playerData = ServerEmulator.Database.CreateGetRequest("users", new FlexibleDB.Value[] { new FlexibleDB.Value("id", id) });
 
-            string status;
+            QueueRequest request = new();
 
             int points = (int)playerData[0][2];
 
             if (level == 0 || points >= ServerEmulator.LevelTable[level])
             {
-                ServerEmulator.AddPlayer(id, playerData[0][1].ToString(), level);
-                ServerEmulator.AddToQueue(id);
+                // ServerEmulator.Players.Add(id, playerData[0][1].ToString(), level);
+                ServerEmulator.Queue.Add(id);
 
-                return Ok("Queue");
-
+                request.UrlIndex = "Queue";
+                request.Status = "Success";
+            }
+            else
+            {
+                request.Status = "FakeData";
             }
 
-            status = "fake data";
-
-            return Ok(status);
+            return Ok(JsonSerializer.Serialize(request));
         }
 
-        public JsonResult SendInput(int input) 
+        public IActionResult GetQueueStatus()
+        {
+            int id = (int)HttpContext.Session.GetInt32("user_id");
+
+            QueueStatus status = new();
+
+            Player player = ServerEmulator.GetPlayer(id);
+            Round round = ServerEmulator.GetPlayerRound(player);
+
+            if (player != null && ServerEmulator.PlayerInQueue(player))
+            {
+                status.Status = "InQueue";
+            }
+            else if (player != null && round != null)
+            {
+                status.Status = "Complete";
+                status.UrlIndex = "Round";
+            }
+            else if (!ServerEmulator.PlayerInQueue(player) && round == null)
+            {
+                status.Status = "Unaccessable";
+                status.UrlIndex = "Index";
+            }
+            else
+            {
+                status.Status = "FakeData";
+            }
+
+            return Ok(JsonSerializer.Serialize(status));
+        }
+
+        public JsonResult SendInput(byte input) 
         {
             int id = (int)HttpContext.Session.GetInt32("user_id");
 
@@ -216,25 +251,6 @@ namespace RockPaperScissors.Controllers
             }
 
             return Json(new Input(status));
-        }
-
-        public IActionResult GetQueueStatus()
-        {
-            int id = (int)HttpContext.Session.GetInt32("user_id");
-
-            string status;
-
-            Player player = ServerEmulator.GetPlayer(id);
-            Round round = ServerEmulator.GetPlayerRound(player);
-
-            if (ServerEmulator.PlayerInQueue(player))
-                status = "inQueue";
-            else if (round != null)
-                return RedirectToAction("Round", "Game");
-            else
-                status = "fakeData";
-
-            return Ok(status);
         }
 
         /*

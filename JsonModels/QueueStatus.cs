@@ -1,12 +1,7 @@
 ﻿namespace RockPaperScissors.JsonModels
 {
-    public class QueueRequest
+    public class QueueStatus
     {
-        // input
-        // int id
-        // byte level
-
-        // output
         public string Status { get; set; }
         public string? UrlIndex { get; set; }
     }
