@@ -24,7 +24,22 @@ function proveAuth(url) {
         async: false,
         success: function (result) {
             if (result) {
-                $('body').html(result);
+                window.location.href = result;
+            }
+        },
+    });
+}
+
+function sendQueueRequest(url) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        contentType: false,
+        processData: false,
+        async: false,
+        success: function (result) {
+            if (result && window.location.href != result) {
+                window.location.href = result;
             }
         },
     });

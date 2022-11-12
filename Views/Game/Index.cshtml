@@ -1,24 +1,16 @@
 ﻿@{
-    ViewData["Title"] = "GameMenu";
+    ViewData["Title"] = "Login";
 }
 
-<link rel="stylesheet" href="~/css/GameIndex/GameIndexMedia.css" asp-append-version="true" />
-
-@section Scripts {
-    <script src=~/js/ajaxRequests.js type="text/javascript"></script>
-    <script type="text/javascript">
-        window.onunload = function() { disconnect("@Url.Action("Disconnect")"); };
-        window.onload = function() { proveAuth("@Url.Action("ProveAuth")");  };
-    </script>
-}
-
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-6 text-center">
-            <h5 class="game-index-text">120 баллов</h5>
-            <h5 class="game-index-text">10 игр сыграно</h5>
-            <button id="free-play-button" class="light-button" onclick="location.href='@Url.Action("PlayFree", "Game", new { })'">Свободная игра</button>
-            <button id="play-button" class="light-button" onclick="location.href='@Url.Action("LevelSelector", "Game", new { })'">Играть</button>
-        </div>
-    </div>
+<div class="text-center">
+    <nav class="navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <h5>Войдите в аккаунт, чтобы начать играть:</h5>
+        <script 
+            async src="https://telegram.org/js/telegram-widget.js?21" 
+            data-telegram-login="RockPaperScissorsWebGameBot" 
+            data-size="large" 
+            data-auth-url="http://192.168.1.167:80/Game/Menu" 
+            data-request-access="write">
+        </script>
+    </nav>
 </div>

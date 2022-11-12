@@ -17,7 +17,12 @@ namespace RockPaperScissors.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index(int id, string username)
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Menu(int id, string username)
         {
             if (id != 0)
                 HttpContext.Session.SetInt32("user_id", id);
@@ -64,10 +69,10 @@ namespace RockPaperScissors.Controllers
         public IActionResult ProveAuth()
         {
             if (CheckBanned())
-                return RedirectToAction("Index", "Home", new { });
+                return Ok("Index");
 
             if (!CheckAuth())
-                return RedirectToAction("Index", "Home", new { });
+                return Ok("Index");
 
             return Ok();
         }
@@ -167,7 +172,7 @@ namespace RockPaperScissors.Controllers
             return true;
         }
 
-        public JsonResult SendQueueRequest(byte level)
+        public IActionResult SendQueueRequest(byte level)
         {
             int id = (int)HttpContext.Session.GetInt32("user_id");
 
@@ -175,18 +180,20 @@ namespace RockPaperScissors.Controllers
 
             string status;
 
-            if ((int)playerData[0][2] >= ServerEmulator.LevelTable[level])
+            int points = (int)playerData[0][2];
+
+            if (level == 0 || points >= ServerEmulator.LevelTable[level])
             {
-                status = "success";
                 ServerEmulator.AddPlayer(id, playerData[0][1].ToString(), level);
                 ServerEmulator.AddToQueue(id);
-            }
-            else
-            {
-                status = "fake data";
+
+                return Ok("Queue");
+
             }
 
-            return Json(new QueueRequest(status));
+            status = "fake data";
+
+            return Ok(status);
         }
 
         public JsonResult SendInput(int input) 
@@ -201,7 +208,6 @@ namespace RockPaperScissors.Controllers
             if(round == null || player == null)
             {
                 status = "fake data";
-
             }
             else
             {
@@ -231,10 +237,13 @@ namespace RockPaperScissors.Controllers
             return Ok(status);
         }
 
-        public JsonResult GetRoundStatus()
+        /*
+                 public JsonResult GetRoundStatus()
         {
             int id = (int)HttpContext.Session.GetInt32("user_id");
             // If win - win data. If lose - lose data. If tie - redirect data or cancelation data.
         }
+         */
+
     }
 }

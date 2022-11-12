@@ -23,6 +23,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZVxMZXZlbFNlbGVjdG9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projects/CSharp/Заказ-RockPaperScissors/RockPaperScissors/Views/Game/Menu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZVxNZW51LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projects/CSharp/Заказ-RockPaperScissors/RockPaperScissors/Views/Game/PlayFree.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZVxQbGF5RnJlZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -41,10 +45,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/Projects/CSharp/Заказ-RockPaperScissors/RockPaperScissors/Views/Game/Win.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZVxXaW4uY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Projects/CSharp/Заказ-RockPaperScissors/RockPaperScissors/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projects/CSharp/Заказ-RockPaperScissors/RockPaperScissors/Views/Shared/Error.cshtml]

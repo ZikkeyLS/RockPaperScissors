@@ -36,7 +36,7 @@ namespace RockPaperScissors
 
                 if (!app.Environment.IsDevelopment())
                 {
-                    app.UseExceptionHandler("/Home/Error");
+                    app.UseExceptionHandler("/Game/Error");
                     app.UseHsts();
                 }
 
@@ -50,7 +50,7 @@ namespace RockPaperScissors
 
                 app.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Game}/{action=Index}/{id?}");
 
                 app.Run();
             });

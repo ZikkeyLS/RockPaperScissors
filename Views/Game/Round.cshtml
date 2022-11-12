@@ -7,10 +7,11 @@
 @section Scripts {
     <script src=~/js/ajaxRequests.js type="text/javascript"></script>
     <script type="text/javascript">
-        window.onunload = function() { ajaxRequest("@Url.Action("Disconnect")"); };
-        window.onload = function() { ajaxRequest("@Url.Action("ProveAuth")"); };
+        window.onunload = function() { disconnect("@Url.Action("Disconnect")"); };
+        window.onload = function() { proveAuth("@Url.Action("ProveAuth")");  };
     </script>
 }
+
 
 <section class="d-flex flex-column justify-content-center align-items-center">
         <div class="container col-lg-6 text-center">
