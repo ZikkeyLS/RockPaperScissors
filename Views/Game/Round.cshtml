@@ -10,6 +10,14 @@
         window.onload = function() { 
             proveAuth("@Url.Action("ProveAuth")"); 
             setInterval(() => hearthbeat("@Url.Action("Hearthbeat")"), 1000);
+
+            document.getElementById("input-0").onclick = function() { sendInput("@Url.Action("SendInput")", 0); };
+            document.getElementById("input-1").onclick = function() { sendInput("@Url.Action("SendInput")", 1); };
+            document.getElementById("input-2").onclick = function() { sendInput("@Url.Action("SendInput")", 2); };
+            document.getElementById("input-3").onclick = function() { sendInput("@Url.Action("SendInput")", 3); };
+            document.getElementById("input-4").onclick = function() { sendInput("@Url.Action("SendInput")", 4); };
+            document.getElementById("input-5").onclick = function() { sendInput("@Url.Action("SendInput")", 5); };
+            document.getElementById("input-6").onclick = function() { sendInput("@Url.Action("SendInput")", 6); };
         };
     </script>
 }
@@ -21,13 +29,13 @@
             <h2>Взнос: 10 баллов</h2>
             <h2>Осталось: 5 секунд </h2>
             <div class="pictures-container">    
-                <img class="circle" src="/images/RawCirclesNamed/Hands_710_01.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceA"/>
-                <img class="circle" src="/images/RawCirclesNamed/Hands_710_02.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceB"/>
-                <img class="circle" src="/images/RawCirclesNamed/Hands_710_03.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceC"/>
-                <img class="circle" src="/images/RawCirclesNamed/Hands_710_04.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceD"/>
-                <img class="circle" src="/images/RawCirclesNamed/Hands_710_05.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceE"/>
-                <img class="circle" src="/images/RawCirclesNamed/Hands_710_06.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceF"/>
-                <img class="circle" src="/images/RawCirclesNamed/Hands_710_07.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceG"/>
+                <img id="input-0" class="circle" src="/images/RawCirclesNamed/Hands_710_01.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceA"/>
+                <img id="input-1" class="circle" src="/images/RawCirclesNamed/Hands_710_02.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceB"/>
+                <img id="input-2" class="circle" src="/images/RawCirclesNamed/Hands_710_03.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceC"/>
+                <img id="input-3" class="circle" src="/images/RawCirclesNamed/Hands_710_04.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceD"/>
+                <img id="input-4" class="circle" src="/images/RawCirclesNamed/Hands_710_05.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceE"/>
+                <img id="input-5" class="circle" src="/images/RawCirclesNamed/Hands_710_06.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceF"/>
+                <img id="input-6" class="circle" src="/images/RawCirclesNamed/Hands_710_07.png" onclick="location.href='@Url.Action("Status", "Game", new { })'" alt="ChoiceG"/>
             </div>
         </div>
 </section>

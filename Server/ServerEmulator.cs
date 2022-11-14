@@ -11,21 +11,11 @@ namespace RockPaperScissors.Server
         public readonly static PlayersComponent Players = new();
         public readonly static RoundsComponent Rounds = new();
 
-        public readonly static List<Tuple<string, string>> TestPlayers = new()
+        public readonly static List<Tuple<int, string>> TestPlayers = new()
         {
-            new Tuple<string, string>("1219923", "Zik234"),
-            new Tuple<string, string>("1419923", "Z6ik"),
-            new Tuple<string, string>("1219923", "Zi213k"),
-            new Tuple<string, string>("1216923", "Zi123k"),
-            new Tuple<string, string>("1219923", "Z21ik"),
-            new Tuple<string, string>("1219923", "Zi6k"),
-            new Tuple<string, string>("12199423", "Zik0"),
-            new Tuple<string, string>("12193923", "Zi09k"),
-            new Tuple<string, string>("12119923", "Zik6"),
-            new Tuple<string, string>("12192923", "Zik1"),
-            new Tuple<string, string>("12199623", "Zik2"),
-            new Tuple<string, string>("12198923", "Zi3k"),
-            new Tuple<string, string>("12190923", "Z3ik"),
+            new Tuple<int, string>(1219923, "Zik234"),
+            new Tuple<int, string>(1419923, "Z6ik"),
+            new Tuple<int, string>(1219623, "Zi213k"),
         };
 
         public static int TestPlayersUsed = 0;
@@ -63,7 +53,7 @@ namespace RockPaperScissors.Server
         {
             while (Running)
             {
-                await Task.Delay(5000);
+                await Task.Delay(3000);
 
                 while (Queue.Lenght >= 3)
                 {
@@ -79,19 +69,19 @@ namespace RockPaperScissors.Server
                         sortedLevelTable[player.Level].Add(player);
                     }
 
-                    int j = 0;
-
                     foreach (List<Player> players in sortedLevelTable.Values)
                     {
-                        j += 1;
-
                         while (players.Count >= 3)
                         {
                             Player first = players[0];
                             Player second = players[1];
                             Player third = players[2];
 
-                            Rounds.Create(new Player[] { first, second, third }, 3, first.Level);
+                            Rounds.Create(new Player[] { first, second, third }, 5, first.Level);
+
+                            players.Remove(first);
+                            players.Remove(second);
+                            players.Remove(third);
 
                             Queue.Remove(first);
                             Queue.Remove(second);

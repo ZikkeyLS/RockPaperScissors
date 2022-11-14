@@ -25,8 +25,19 @@ namespace RockPaperScissors.Controllers
 
         public IActionResult Menu(int id, string username)
         {
-            if (id != 0)
-                HttpContext.Session.SetInt32("user_id", id);
+            if (id != 0 && ServerEmulator.TestPlayersUsed < ServerEmulator.TestPlayers.Count)
+            {
+                Tuple<int, string> data = ServerEmulator.TestPlayers[ServerEmulator.TestPlayersUsed];
+
+                HttpContext.Session.SetInt32("user_id", data.Item1);
+                HttpContext.Session.SetString("user_name", data.Item2);
+
+                ServerEmulator.TestPlayersUsed += 1;
+                // HttpContext.Session.SetInt32("user_id", id);
+                // HttpContext.Session.SetString("user_name", username);
+            }
+
+
 
             return View();
         }
@@ -291,26 +302,26 @@ namespace RockPaperScissors.Controllers
             return Ok(JsonSerializer.Serialize(status));
         }
 
-        public JsonResult SendInput(byte input)
+        public IActionResult SendInput(byte input)
         {
             int id = (int)HttpContext.Session.GetInt32("user_id");
 
             Player player = ServerEmulator.Players.Get(id);
             Round round = ServerEmulator.Rounds.GetPlayersRound(player);
 
-            string status;
+            Input status = new();
 
             if (round == null || player == null)
             {
-                status = "fake data";
+                status.Status = "fake data";
             }
             else
             {
-                status = "all working";
+                status.Status = "all working";
                 round.AddPlayerInput(player, input);
             }
 
-            return Json(new Input(status));
+            return Ok(JsonSerializer.Serialize(status));
         }
 
         /*

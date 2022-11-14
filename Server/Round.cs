@@ -16,12 +16,12 @@ namespace RockPaperScissors.Server
         public enum Figure : byte
         {
             Rock = 0,
-            Paper,
-            Scissors,
             Water,
-            Fire,
             Air,
-            Sponge
+            Paper, 
+            Sponge,
+            Scissors,
+            Fire
         }
 
         public class FigureStatus
@@ -101,7 +101,7 @@ namespace RockPaperScissors.Server
             List<PlayerInput> checkedInputs = new();
 
             for (int i = 0; i < _inputs.Length; i++)
-                if (_inputs != null)
+                if (_inputs[i] != null)
                     checkedInputs.Add(_inputs[i]);
 
             int loserCount = 0;
@@ -127,6 +127,7 @@ namespace RockPaperScissors.Server
                     {
                         if (status.BeatenBy.Contains((Figure)checkInput.Value))
                         {
+                            Console.WriteLine("Looser" + input.Player.Id + " input" + input.Value);
                             input.Winner = 0;
                             loserCount += 1;
                         }
@@ -134,9 +135,11 @@ namespace RockPaperScissors.Server
                 }
             }
 
-            if (nonCount != 0 && loserCount == 0)
+            if ((nonCount != 0 && loserCount == 0) || checkedInputs.Count == 0)
             {
                 _status = Status.denied;
+                await Task.Delay(2000);
+                ServerEmulator.Rounds.Remove(this);
                 return;
             }
 
@@ -159,7 +162,7 @@ namespace RockPaperScissors.Server
 
                     _winners.Add(input.Player);
                     DataRowCollection collection = ServerEmulator.Database.CreateGetRequest("users", new DB.FlexibleDB.Value[] { new DB.FlexibleDB.Value("id", input.Player.Id) });
-                    ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", ((int)collection[0][2]) + _score));
+                    ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", ((int)collection[0][2]) + _score), new DB.FlexibleDB.Value("id", input.Player.Id));
                 }
                 else
                 {
@@ -170,7 +173,7 @@ namespace RockPaperScissors.Server
 
             _status = Status.complete;
 
-            await Task.Delay(30000);
+            await Task.Delay(2000);
             ServerEmulator.Rounds.Remove(this);
         }
 

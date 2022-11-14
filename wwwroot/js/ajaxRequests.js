@@ -11,7 +11,7 @@
         },
         error: function (request, status, error) {
             console.log(status);
-        },
+        }
     });
 }
 
@@ -26,7 +26,7 @@ function proveAuth(url) {
             if (result) {
                 window.location.href = result;
             }
-        },
+        }
     });
 }
 
@@ -44,7 +44,7 @@ function sendQueueRequest(url) {
                 if (resultObject.UrlIndex != null)
                     window.location.href = resultObject.UrlIndex;
             }
-        },
+        }
     });
 }
 
@@ -62,7 +62,7 @@ function getQueueStatus(url) {
                 if (resultObject.UrlIndex != null)
                     window.location.href = resultObject.UrlIndex;
             }
-        },
+        }
     });
 }
 
@@ -77,11 +77,8 @@ function hearthbeat(url) {
             if (result) {
                 const resultObject = JSON.parse(result);
 
-                if (resultObject.UrlIndex != null && !window.location.href.includes(resultObject.UrlIndex)) {
-                    alert(window.location.href);
+                if (resultObject.UrlIndex != null && !window.location.href.includes(resultObject.UrlIndex))
                     window.location.href = resultObject.UrlIndex;
-                }
-
             }
         }
     });
@@ -102,5 +99,15 @@ function quitQueueRequest(url) {
                     window.location.href = resultObject.UrlIndex;
             }
         }
+    });
+}
+
+function sendInput(url, input) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: "json",
+        data: { "input" : input },
+        async: true
     });
 }
