@@ -80,21 +80,54 @@ namespace RockPaperScissors.Controllers
 
         public IActionResult Hearthbeat()
         {
-            int? userId = HttpContext.Session.GetInt32("user_id");
+            int? id = HttpContext.Session.GetInt32("user_id");
 
-            if (userId != null)
+            CompactRedirect status = new();
+
+            if (id == null)
             {
-                Player player = ServerEmulator.Players.Find((element) => userId == element.Id);
+                status.Status = "FakeData";
+                return Ok(JsonSerializer.Serialize(status));
+            }
 
+            Player player = ServerEmulator.Players.Get(id.Value);
+            Round round = ServerEmulator.Rounds.GetPlayersRound(player);
+            bool inQueue = ServerEmulator.Queue.PlayerInQueue(player);
+
+            if (id != null)
+            {
                 if (player != null)
                 {
                     player.SetLastTime(DateTime.Now);
-                    return Ok("Beat");
+                    status.Status = "Beat";
                 }
             }
 
+            status.UrlIndex = null;
 
-            return Ok("Error-Beat");
+            if (inQueue)
+            {
+                status.UrlIndex = "Queue";
+            }
+            else if (round != null && player != null)
+            {
+                switch (round.GameStatus)
+                {
+                    case Server.Round.Status.waiting:
+                    case Server.Round.Status.initialized:
+                    case Server.Round.Status.readress:
+                        status.UrlIndex = "Round";
+                        break;
+                    case Server.Round.Status.complete:
+                        status.UrlIndex = "Status";
+                        break;
+                    case Server.Round.Status.denied:
+                        status.UrlIndex = "Menu";
+                        break;
+                }
+            }
+
+            return Ok(JsonSerializer.Serialize(status));
         }
 
         public bool CheckAuth()

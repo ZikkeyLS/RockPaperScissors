@@ -77,8 +77,11 @@ function hearthbeat(url) {
             if (result) {
                 const resultObject = JSON.parse(result);
 
-                if (resultObject.UrlIndex != null)
+                if (resultObject.UrlIndex != null && !window.location.href.includes(resultObject.UrlIndex)) {
+                    alert(window.location.href);
                     window.location.href = resultObject.UrlIndex;
+                }
+
             }
         }
     });

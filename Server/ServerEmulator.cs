@@ -11,6 +11,26 @@ namespace RockPaperScissors.Server
         public readonly static PlayersComponent Players = new();
         public readonly static RoundsComponent Rounds = new();
 
+        public readonly static List<Tuple<string, string>> TestPlayers = new()
+        {
+            new Tuple<string, string>("1219923", "Zik234"),
+            new Tuple<string, string>("1419923", "Z6ik"),
+            new Tuple<string, string>("1219923", "Zi213k"),
+            new Tuple<string, string>("1216923", "Zi123k"),
+            new Tuple<string, string>("1219923", "Z21ik"),
+            new Tuple<string, string>("1219923", "Zi6k"),
+            new Tuple<string, string>("12199423", "Zik0"),
+            new Tuple<string, string>("12193923", "Zi09k"),
+            new Tuple<string, string>("12119923", "Zik6"),
+            new Tuple<string, string>("12192923", "Zik1"),
+            new Tuple<string, string>("12199623", "Zik2"),
+            new Tuple<string, string>("12198923", "Zi3k"),
+            new Tuple<string, string>("12190923", "Z3ik"),
+        };
+
+        public static int TestPlayersUsed = 0;
+
+
         public static bool Running { get; private set; } = true;
 
         public static readonly Dictionary<byte, byte> LevelTable = new()
