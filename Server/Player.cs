@@ -4,7 +4,7 @@
     {
         public readonly int Id;
         public readonly string Name;
-        public readonly byte Level = 0;
+        public byte Level = 0;
 
         private DateTime lastTime;
 
@@ -17,28 +17,30 @@
             Live();
         }
 
-        public async void Live()
+        public async Task Live()
         {
-            await Task.Factory.StartNew(() =>
+            while (true)
             {
-                while (true)
-                {
-                    Task.Delay(3000);
+                await Task.Delay(3000);
 
-                    long lastSeconds = lastTime.Ticks / TimeSpan.TicksPerSecond;
-                    long seconds = DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
+                long lastSeconds = lastTime.Ticks / TimeSpan.TicksPerSecond;
+                long seconds = DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
 
-                    if (seconds - lastSeconds > 3)
-                    {
-                        ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("logged_in_device", ""), new DB.FlexibleDB.Value("id", Id));
-                        ServerEmulator.Players.Remove(this);
-                        Dispose();
-                        return;
-                    }
+                Console.WriteLine(lastSeconds + " " + seconds);
 
+                if (lastSeconds == 0)
                     lastSeconds = seconds;
+
+                if (seconds - lastSeconds >= 3)
+                {
+                    ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("logged_in_device", ""), new DB.FlexibleDB.Value("id", Id));
+                    ServerEmulator.Players.Remove(this);
+                    Dispose();
+                    return;
                 }
-            });
+
+                lastSeconds = seconds;
+            }
         }
 
         public void SetLastTime(DateTime time)

@@ -20,18 +20,11 @@
             return queue.Contains(player);
         }
 
-        public void Remove(int id)
-        {
-            Player player = ServerEmulator.Players.Find((element) => element.Id == id);
-
-            Remove(player);
-        }
-
         public void Remove(Player player)
         {
             if (player != null)
-                if (ServerEmulator.Players.Contains(player))
-                    ServerEmulator.Players.Remove(player);
+                if (queue.Contains(player))
+                    queue.Remove(player);
         }
     }
 }

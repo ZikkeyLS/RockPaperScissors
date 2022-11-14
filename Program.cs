@@ -10,6 +10,8 @@ namespace RockPaperScissors
             SetupASP(args);
 
             ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", ""));
+
+            ServerEmulator.RunCycle();
            
             Console.ReadLine();
         }

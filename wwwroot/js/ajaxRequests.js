@@ -54,7 +54,7 @@ function getQueueStatus(url) {
         url: url,
         contentType: false,
         processData: false,
-        async: false,
+        async: true,
         success: function (result) {
             if (result) {
                 const resultObject = JSON.parse(result);
@@ -63,5 +63,41 @@ function getQueueStatus(url) {
                     window.location.href = resultObject.UrlIndex;
             }
         },
+    });
+}
+
+function hearthbeat(url) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        contentType: false,
+        processData: false,
+        async: true,
+        success: function (result) {
+            if (result) {
+                const resultObject = JSON.parse(result);
+
+                if (resultObject.UrlIndex != null)
+                    window.location.href = resultObject.UrlIndex;
+            }
+        }
+    });
+}
+
+function quitQueueRequest(url) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        contentType: false,
+        processData: false,
+        async: false,
+        success: function (result) {
+            if (result) {
+                const resultObject = JSON.parse(result);
+
+                if (resultObject.UrlIndex != null)
+                    window.location.href = resultObject.UrlIndex;
+            }
+        }
     });
 }

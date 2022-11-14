@@ -39,46 +39,49 @@ namespace RockPaperScissors.Server
             { 0, 1 }
         };
 
-        public static async void RunCycle()
+        public static async Task RunCycle()
         {
-            await Task.Factory.StartNew(() =>
+            while (Running)
             {
-                while (Running)
+                await Task.Delay(5000);
+
+                while (Queue.Lenght >= 3)
                 {
-                    Task.Delay(5000);
+                    Dictionary<byte, List<Player>> sortedLevelTable = new();
 
-                    while (Queue.Lenght >= 3)
+                    for (int i = 0; i < Queue.Lenght; i++)
                     {
-                        Dictionary<byte, List<Player>> sortedLevelTable = new();
+                        Player player = Queue.Raw[i];
 
-                        for (int i = 0; i < Queue.Lenght; i++)
+                        if (!sortedLevelTable.ContainsKey(player.Level))
+                            sortedLevelTable.Add(player.Level, new List<Player>());
+
+                        sortedLevelTable[player.Level].Add(player);
+                    }
+
+                    int j = 0;
+
+                    foreach (List<Player> players in sortedLevelTable.Values)
+                    {
+                        j += 1;
+
+                        while (players.Count >= 3)
                         {
-                            Player player = Queue.Raw[i];
+                            Player first = players[0];
+                            Player second = players[1];
+                            Player third = players[2];
 
-                            if (!sortedLevelTable.ContainsKey(player.Level))
-                                sortedLevelTable.Add(player.Level, new List<Player>());
+                            Rounds.Create(new Player[] { first, second, third }, 3, first.Level);
 
-                            sortedLevelTable[player.Level].Add(player);
-                        }
-
-                        foreach (List<Player> players in sortedLevelTable.Values)
-                        {
-                            while(players.Count >= 3)
-                            {
-                                Player first = players[0];
-                                Player second = players[1];
-                                Player third = players[2];
-
-                                Rounds.Create(new Player[] { first, second, third });
-
-                                Queue.Remove(first);
-                                Queue.Remove(second);
-                                Queue.Remove(third);
-                            }
+                            Queue.Remove(first);
+                            Queue.Remove(second);
+                            Queue.Remove(third);
                         }
                     }
                 }
-            });
+
+                GC.Collect();
+            }
         }
 
         public static void StopCycle()

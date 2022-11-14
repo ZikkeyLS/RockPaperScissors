@@ -8,13 +8,14 @@
 @section Scripts {
     <script src=~/js/ajaxRequests.js type="text/javascript"></script>
     <script type="text/javascript">
-        window.onunload = function() { disconnect("@Url.Action("Disconnect")"); };
         window.onload = function() 
         {
             proveAuth("@Url.Action("ProveAuth")"); 
             
             var button = document.getElementById("play-button");
             button.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")"); }; 
+
+            setInterval(() => hearthbeat("@Url.Action("Hearthbeat")"), 1000);
         };
     </script>
 }

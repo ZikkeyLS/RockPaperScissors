@@ -78,12 +78,13 @@ namespace RockPaperScissors.Server
         public bool HasWinner => Winners != null;
         public int Iteration => _iteration;
 
-        public Round(Player[] players)
+        public Round(Player[] players, int waitSeconds, byte level)
         {
             _players = players;
+            Open(players, waitSeconds, level);
         }
 
-        public async void Open(Player[] players, int waitSeconds, byte level)
+        public async Task Open(Player[] players, int waitSeconds, byte level)
         {
             _players = players;
             _waitSeconds = waitSeconds;
@@ -91,91 +92,86 @@ namespace RockPaperScissors.Server
             _level = level;
             _score = ServerEmulator.LevelTable[level];
 
+            if (_status == Status.readress)
+                await Task.Delay(5000);
 
+            _status = Status.waiting;
+            await Task.Delay(_waitSeconds * 1000);
 
-            await Task.Factory.StartNew(() =>
+            List<PlayerInput> checkedInputs = new();
+
+            for (int i = 0; i < _inputs.Length; i++)
+                if (_inputs != null)
+                    checkedInputs.Add(_inputs[i]);
+
+            int loserCount = 0;
+            int nonCount = 0;
+
+            for (int i = 0; i < checkedInputs.Count; i++)
             {
-                if (_status == Status.readress)
-                    Thread.Sleep(5000);
+                PlayerInput input = checkedInputs[i];
+                FigureStatus status = figureStatuses.Find((element) => (Figure)input.Value == element.Figure);
 
-                _status = Status.waiting;
-                Thread.Sleep(_waitSeconds * 1000);
-
-                List<PlayerInput> checkedInputs = new();
-
-                for (int i = 0; i < _inputs.Length; i++)
-                    if (_inputs != null)
-                        checkedInputs.Add(_inputs[i]);
-
-                int loserCount = 0;
-                int nonCount = 0;
-
-                for (int i = 0; i < checkedInputs.Count; i++)
+                if (status == null)
                 {
-                    PlayerInput input = checkedInputs[i];
-                    FigureStatus status = figureStatuses.Find((element) => (Figure)input.Value == element.Figure);
+                    input.Winner = 0;
+                    nonCount += 1;
+                    continue;
+                }
 
-                    if (status == null)
+                for (int j = 0; j < checkedInputs.Count; j++)
+                {
+                    PlayerInput checkInput = checkedInputs[j];
+
+                    if (input != checkInput)
                     {
-                        input.Winner = 0;
-                        nonCount += 1;
-                        continue;
-                    }
-
-                    for (int j = 0; j < checkedInputs.Count; j++)
-                    {
-                        PlayerInput checkInput = checkedInputs[j];
-
-                        if (input != checkInput)
+                        if (status.BeatenBy.Contains((Figure)checkInput.Value))
                         {
-                            if (status.BeatenBy.Contains((Figure)checkInput.Value))
-                            {
-                                input.Winner = 0;
-                                loserCount += 1;
-                            }
+                            input.Winner = 0;
+                            loserCount += 1;
                         }
                     }
                 }
+            }
 
-                if (nonCount != 0 && loserCount == 0)
+            if (nonCount != 0 && loserCount == 0)
+            {
+                _status = Status.denied;
+                return;
+            }
+
+            if (loserCount == 0 && nonCount == 0)
+            {
+                _status = Status.readress;
+                _iteration += 1;
+                await Open(players, waitSeconds, level);
+                return;
+            }
+
+            for (int i = 0; i < checkedInputs.Count; i++)
+            {
+                PlayerInput input = checkedInputs[i];
+
+                if (input.Winner == 1)
                 {
-                    _status = Status.denied;
-                    return;
-                }
+                    if (_winners == null)
+                        _winners = new List<Player>();
 
-                if (loserCount == 0 && nonCount == 0)
+                    _winners.Add(input.Player);
+                    DataRowCollection collection = ServerEmulator.Database.CreateGetRequest("users", new DB.FlexibleDB.Value[] { new DB.FlexibleDB.Value("id", input.Player.Id) });
+                    ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", ((int)collection[0][2]) + _score));
+                }
+                else
                 {
-                    _status = Status.readress;
-                    _iteration += 1;
-                    Open(players, waitSeconds, level);
-                    return;
+                    DataRowCollection collection = ServerEmulator.Database.CreateGetRequest("users", new DB.FlexibleDB.Value[] { new DB.FlexibleDB.Value("id", input.Player.Id) });
+                    ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", Math.Clamp((int)collection[0][2] - _score, 0, 9999)));
                 }
+            }
 
-                for (int i = 0; i < checkedInputs.Count; i++)
-                {
-                    PlayerInput input = checkedInputs[i];
+            _status = Status.complete;
 
-                    if (input.Winner == 1)
-                    {
-                        if (_winners == null)
-                            _winners = new List<Player>();
-
-                        _winners.Add(input.Player);
-                        DataRowCollection collection = ServerEmulator.Database.CreateGetRequest("users", new DB.FlexibleDB.Value[] { new DB.FlexibleDB.Value("id", input.Player.Id) });
-                        ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", ((int)collection[0][2]) + _score));
-                    }
-                    else
-                    {
-                        DataRowCollection collection = ServerEmulator.Database.CreateGetRequest("users", new DB.FlexibleDB.Value[] { new DB.FlexibleDB.Value("id", input.Player.Id) });
-                        ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", Math.Clamp((int)collection[0][2] - _score, 0, 9999)));
-                    }
-                }
-
-                _status = Status.complete;
-
-                Thread.Sleep(30000);
-                ServerEmulator.RemoveRound(this);
-            });
+            await Task.Delay(30000);
+            ServerEmulator.Rounds.Remove(this);
         }
 
         public bool ContainsPlayer(Player player)

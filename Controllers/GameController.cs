@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RockPaperScissors.DB;
+using RockPaperScissors.JsonModels;
 using RockPaperScissors.Models;
 using RockPaperScissors.Server;
 using System.Data;
 using System.Diagnostics;
-using RockPaperScissors.JsonModels;
 using System.Text.Json;
 
 namespace RockPaperScissors.Controllers
@@ -78,27 +78,23 @@ namespace RockPaperScissors.Controllers
             return Ok();
         }
 
-        public IActionResult Disconnect()
+        public IActionResult Hearthbeat()
         {
             int? userId = HttpContext.Session.GetInt32("user_id");
-            string? userAgent = HttpContext.Session.GetString("user_agent");
 
-            if (userId != null && userAgent != null)
+            if (userId != null)
             {
-                DataRowCollection dataRow = ServerEmulator.Database.CreateGetRequest("users", new FlexibleDB.Value[1] { new FlexibleDB.Value("id", userId) });
+                Player player = ServerEmulator.Players.Find((element) => userId == element.Id);
 
-                object? loggedIn = dataRow[0][5];
-
-                if (loggedIn != null)
+                if (player != null)
                 {
-                    string loggedInDevice = (string)loggedIn;
-
-                    if (loggedInDevice == userAgent.Replace(" ", ""))
-                        ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", ""), new FlexibleDB.Value("id", userId));
+                    player.SetLastTime(DateTime.Now);
+                    return Ok("Beat");
                 }
             }
 
-            return Ok();
+
+            return Ok("Error-Beat");
         }
 
         public bool CheckAuth()
@@ -120,8 +116,13 @@ namespace RockPaperScissors.Controllers
 
                     if (loggedInDevice == "")
                     {
-                        ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", userAgent), new FlexibleDB.Value("id", userId));
-                        ServerEmulator.Players.Add(userId.Value, (string)dataRow[0][1]);
+                        if (ServerEmulator.Players.Find((element) => element.Id == userId.Value) == null)
+                        {
+                            ServerEmulator.Database.CreateChangeRequest("users", new FlexibleDB.Value("logged_in_device", userAgent), new FlexibleDB.Value("id", userId));
+
+                            ServerEmulator.Players.Add(userId.Value, (string)dataRow[0][1]);
+                        }
+
                         return true;
                     }
                     else if (loggedInDevice == userAgent.Replace(" ", ""))
@@ -186,7 +187,7 @@ namespace RockPaperScissors.Controllers
 
             if (level == 0 || points >= ServerEmulator.LevelTable[level])
             {
-                // ServerEmulator.Players.Add(id, playerData[0][1].ToString(), level);
+                ServerEmulator.Players.Get(id).Level = level;
                 ServerEmulator.Queue.Add(id);
 
                 request.UrlIndex = "Queue";
@@ -202,14 +203,20 @@ namespace RockPaperScissors.Controllers
 
         public IActionResult GetQueueStatus()
         {
-            int id = (int)HttpContext.Session.GetInt32("user_id");
+            int? id = HttpContext.Session.GetInt32("user_id");
 
-            QueueStatus status = new();
+            CompactRedirect status = new();
 
-            Player player = ServerEmulator.GetPlayer(id);
-            Round round = ServerEmulator.GetPlayerRound(player);
+            if (id == null)
+            {
+                status.Status = "FakeData";
+                return Ok(JsonSerializer.Serialize(status));
+            }
 
-            if (player != null && ServerEmulator.PlayerInQueue(player))
+            Player player = ServerEmulator.Players.Get(id.Value);
+            Round round = ServerEmulator.Rounds.GetPlayersRound(player);
+
+            if (player != null && ServerEmulator.Queue.PlayerInQueue(player))
             {
                 status.Status = "InQueue";
             }
@@ -218,10 +225,10 @@ namespace RockPaperScissors.Controllers
                 status.Status = "Complete";
                 status.UrlIndex = "Round";
             }
-            else if (!ServerEmulator.PlayerInQueue(player) && round == null)
+            else if (!ServerEmulator.Queue.PlayerInQueue(player) && round == null)
             {
                 status.Status = "Unaccessable";
-                status.UrlIndex = "Index";
+                status.UrlIndex = "Menu";
             }
             else
             {
@@ -231,16 +238,36 @@ namespace RockPaperScissors.Controllers
             return Ok(JsonSerializer.Serialize(status));
         }
 
-        public JsonResult SendInput(byte input) 
+        public IActionResult QuitQueueRequest()
         {
             int id = (int)HttpContext.Session.GetInt32("user_id");
 
-            Player player = ServerEmulator.GetPlayer(id);
-            Round round = ServerEmulator.GetPlayerRound(player);
+            CompactRedirect status = new();
+
+            status.Status = "fakeData";
+
+            Player player = ServerEmulator.Players.Get(id);
+
+            if (player != null && ServerEmulator.Queue.PlayerInQueue(player))
+            {
+                ServerEmulator.Queue.Remove(player);
+                status.Status = "Complete";
+                status.UrlIndex = "Menu";
+            }
+
+            return Ok(JsonSerializer.Serialize(status));
+        }
+
+        public JsonResult SendInput(byte input)
+        {
+            int id = (int)HttpContext.Session.GetInt32("user_id");
+
+            Player player = ServerEmulator.Players.Get(id);
+            Round round = ServerEmulator.Rounds.GetPlayersRound(player);
 
             string status;
 
-            if(round == null || player == null)
+            if (round == null || player == null)
             {
                 status = "fake data";
             }

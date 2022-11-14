@@ -17,9 +17,9 @@
             return null;
         }
 
-        public void Create(Player[] players)
+        public void Create(Player[] players, int waitSeconds, byte level)
         {
-            rounds.Add(new Round(players));
+            rounds.Add(new Round(players, waitSeconds, level));
         }
 
         public void Remove(Round round)

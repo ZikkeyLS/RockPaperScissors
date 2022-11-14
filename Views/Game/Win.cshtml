@@ -7,8 +7,11 @@
 @section Scripts {
     <script src=~/js/ajaxRequests.js type="text/javascript"></script>
     <script type="text/javascript">
-        window.onunload = function() { disconnect("@Url.Action("Disconnect")"); };
-        window.onload = function() { proveAuth("@Url.Action("ProveAuth")");  };
+        window.onload = function() {
+            proveAuth("@Url.Action("ProveAuth")");  
+        
+            setInterval(() => hearthbeat("@Url.Action("Hearthbeat")"), 1000);
+        };
     </script>
 }
 

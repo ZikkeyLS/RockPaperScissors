@@ -4,7 +4,7 @@
     {
         private readonly List<Player> players = new();
 
-        public void Add(int id, string name, byte level)
+        public void Add(int id, string name, byte level = 0)
         {
             players.Add(new Player(id, name, level));
         }
