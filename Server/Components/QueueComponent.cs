@@ -12,7 +12,10 @@
             Player player = ServerEmulator.Players.Find((element) => element.Id == id);
 
             if (player != null)
+            {
                 queue.Add(player);
+                player.SetQueueStart();
+            }
         }
 
         public bool PlayerInQueue(Player player)

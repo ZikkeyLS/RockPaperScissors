@@ -30,12 +30,12 @@ function proveAuth(url) {
     });
 }
 
-function sendQueueRequest(url) {
+function sendQueueRequest(url, level) {
     $.ajax({
         type: "POST",
         url: url,
-        contentType: false,
-        processData: false,
+        dataType: "json",
+        data: { "level" : level },
         async: false,
         success: function (result) {
             if (result) {
@@ -109,5 +109,92 @@ function sendInput(url, input) {
         dataType: "json",
         data: { "input" : input },
         async: true
+    });
+}
+
+function verifyButtonState(url, button, level) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: "json",
+        data: { "level" : level },
+        async: true,
+        success: function (result) {
+            if (result) {
+                button.disabled = result;
+            }
+        }
+    });
+}
+
+function roundDataRequest(url, roundText, scoreText, leftTimeText) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        async: true,
+        success: function (result) {
+            if (result != null) {
+                const resultObject = JSON.parse(result);
+
+                if (resultObject != null)
+                {
+                    if (resultObject.RoundNumber != null && resultObject.Level != null)
+                        roundText.textContent = "Раунд: " + resultObject.RoundNumber.toString() + "-" + resultObject.Level.toString();
+
+                    if (resultObject.Score != null)
+                        scoreText.textContent = "Взнос: " + resultObject.Score.toString();
+
+                    if (resultObject.LeftTime != null)
+                        leftTimeText.textContent = "Осталось: " + resultObject.LeftTime.toString() + " секунд";
+                }
+            }
+        }
+    });
+}
+
+function queueDataRequest(url, levelText, playersText, waitTimeText) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        async: true,
+        success: function (result) {
+            if (result != null) {
+                const resultObject = JSON.parse(result);
+
+                if (resultObject != null) {
+
+                    if (resultObject.Level != null)
+                        levelText.textContent = "Уровень: " + resultObject.Level.toString();
+
+                    if (resultObject.PlayersCount != null)
+                        playersText.textContent = "Игроков в очереди: " + resultObject.PlayersCount.toString();
+
+                    if (resultObject.WaitTime != null)
+                        waitTimeText.textContent = "Время ожидания: " + resultObject.WaitTime + " минут";
+                }
+            }
+        }
+    });
+}
+
+function getMenuPageStatus(url, scoreText, gamesText) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        async: true,
+        success: function (result) {
+            if (result != null) {
+                const resultObject = JSON.parse(result);
+
+                if (resultObject != null) {
+
+                    if (resultObject.Score != null)
+                        scoreText.textContent = resultObject.Score.toString() + " баллов";
+
+                    if (resultObject.Games != null)
+                        gamesText.textContent = resultObject.Games.toString() + " игр";
+                }
+            }
+        }
     });
 }

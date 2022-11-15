@@ -15,6 +15,7 @@
 
             setInterval(() => getQueueStatus("@Url.Action("GetQueueStatus")"), 2000);
             setInterval(() => hearthbeat("@Url.Action("Hearthbeat")"), 1000);
+            setInterval(() => queueDataRequest("@Url.Action("QueueDataRequest")", document.getElementById("levelText"), document.getElementById("playersCountText"), document.getElementById("waitTimeText")), 1000);
         };
     </script>
 }
@@ -23,9 +24,9 @@
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-6 text-center">
-            <h2>Уровень: 0</h2>
-            <h2>Номер в очереди: 10</h2>
-            <h2>Время ожидания: 1:49 минут</h2>
+            <h2 id="levelText">Уровень: 0</h2>
+            <h2 id="playersCountText">Игроков в очереди: 10</h2>
+            <h2 id="waitTimeText">Время ожидания: 1:49 минут</h2>
             <img src="/images/SameSize/Hands_00.png" alt="Tutorial"/>
             <button id="quit-button" class="light-button" onclick="location.href='@Url.Action("Index", "Game", new { })'">Выйти</button>
         </div>

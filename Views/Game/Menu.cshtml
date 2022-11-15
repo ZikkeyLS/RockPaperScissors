@@ -9,6 +9,7 @@
     <script type="text/javascript">
         window.onload = function() { 
             proveAuth("@Url.Action("ProveAuth")");
+            getMenuPageStatus("@Url.Action("GetMenuPageStatus")", document.getElementById("scoreText"), document.getElementById("gamesText"));
 
             setInterval(() => hearthbeat("@Url.Action("Hearthbeat")"), 1000);
         };
@@ -18,8 +19,8 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-lg-6 text-center">
-            <h5 class="game-index-text">120 баллов</h5>
-            <h5 class="game-index-text">10 игр сыграно</h5>
+            <h5 id="scoreText" class="game-index-text">120 баллов</h5>
+            <h5 id="gamesText" class="game-index-text">10 игр сыграно</h5>
             <button id="free-play-button" class="light-button" onclick="location.href='@Url.Action("PlayFree", "Game", new { })'">Свободная игра</button>
             <button id="play-button" class="light-button" onclick="location.href='@Url.Action("LevelSelector", "Game", new { })'">Играть</button>
         </div>

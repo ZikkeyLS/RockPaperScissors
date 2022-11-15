@@ -11,9 +11,8 @@
         window.onload = function() 
         {
             proveAuth("@Url.Action("ProveAuth")"); 
-            
-            var button = document.getElementById("play-button");
-            button.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")"); }; 
+
+            document.getElementById("play-button").onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 0); }; 
 
             setInterval(() => hearthbeat("@Url.Action("Hearthbeat")"), 1000);
         };

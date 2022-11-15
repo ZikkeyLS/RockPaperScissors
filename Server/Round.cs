@@ -70,13 +70,17 @@ namespace RockPaperScissors.Server
         private byte _level = 0;
         private int _score = 0;
         private int _iteration = 0;
+        private DateTime _startTime;
 
         private Status _status = Status.initialized;
 
         public Status GameStatus => _status;
+        public byte Level => _level;
         public Player[] Winners => _winners.ToArray();
         public bool HasWinner => Winners != null;
         public int Iteration => _iteration;
+        public DateTime StartTime => _startTime;
+        public int WaitSeconds => _waitSeconds;
 
         public Round(Player[] players, int waitSeconds, byte level)
         {
@@ -95,6 +99,7 @@ namespace RockPaperScissors.Server
             if (_status == Status.readress)
                 await Task.Delay(5000);
 
+            _startTime = DateTime.Now;
             _status = Status.waiting;
             await Task.Delay(_waitSeconds * 1000);
 
@@ -147,6 +152,7 @@ namespace RockPaperScissors.Server
             {
                 _status = Status.readress;
                 _iteration += 1;
+                _inputsCount = 0;
                 await Open(players, waitSeconds, level);
                 return;
             }
@@ -154,6 +160,7 @@ namespace RockPaperScissors.Server
             for (int i = 0; i < checkedInputs.Count; i++)
             {
                 PlayerInput input = checkedInputs[i];
+                DataRowCollection collection = ServerEmulator.Database.CreateGetRequest("users", new DB.FlexibleDB.Value[] { new DB.FlexibleDB.Value("id", input.Player.Id) });
 
                 if (input.Winner == 1)
                 {
@@ -161,14 +168,14 @@ namespace RockPaperScissors.Server
                         _winners = new List<Player>();
 
                     _winners.Add(input.Player);
-                    DataRowCollection collection = ServerEmulator.Database.CreateGetRequest("users", new DB.FlexibleDB.Value[] { new DB.FlexibleDB.Value("id", input.Player.Id) });
                     ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", ((int)collection[0][2]) + _score), new DB.FlexibleDB.Value("id", input.Player.Id));
                 }
-                else
+                else if(level != 0)
                 {
-                    DataRowCollection collection = ServerEmulator.Database.CreateGetRequest("users", new DB.FlexibleDB.Value[] { new DB.FlexibleDB.Value("id", input.Player.Id) });
-                    ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", Math.Clamp((int)collection[0][2] - _score, 0, 9999)));
+                    ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", Math.Clamp((int)collection[0][2] - _score, 0, 9999)), new DB.FlexibleDB.Value("id", input.Player.Id));
                 }
+
+                ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("games", ((int)collection[0][3]) + 1), new DB.FlexibleDB.Value("id", input.Player.Id));
             }
 
             _status = Status.complete;

@@ -7,6 +7,9 @@
         public byte Level = 0;
 
         private DateTime lastTime;
+        private DateTime queueStart;
+
+        public DateTime QueueStart => queueStart;
 
         public Player(int id, string name, byte level = 0)
         {
@@ -15,6 +18,11 @@
             Level = level;
 
             Live();
+        }
+
+        public void SetQueueStart()
+        {
+            queueStart = DateTime.Now;
         }
 
         public async Task Live()
@@ -26,8 +34,6 @@
                 long lastSeconds = lastTime.Ticks / TimeSpan.TicksPerSecond;
                 long seconds = DateTime.Now.Ticks / TimeSpan.TicksPerSecond;
 
-                Console.WriteLine(lastSeconds + " " + seconds);
-
                 if (lastSeconds == 0)
                     lastSeconds = seconds;
 
@@ -38,8 +44,6 @@
                     Dispose();
                     return;
                 }
-
-                lastSeconds = seconds;
             }
         }
 

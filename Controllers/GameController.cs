@@ -98,6 +98,7 @@ namespace RockPaperScissors.Controllers
             if (id == null)
             {
                 status.Status = "FakeData";
+                status.UrlIndex = "Index";
                 return Ok(JsonSerializer.Serialize(status));
             }
 
@@ -324,13 +325,79 @@ namespace RockPaperScissors.Controllers
             return Ok(JsonSerializer.Serialize(status));
         }
 
-        /*
-                 public JsonResult GetRoundStatus()
+        public IActionResult VerifyButtonState(byte level)
         {
             int id = (int)HttpContext.Session.GetInt32("user_id");
-            // If win - win data. If lose - lose data. If tie - redirect data or cancelation data.
-        }
-         */
 
+            DataRowCollection playerData = ServerEmulator.Database.CreateGetRequest("users", new FlexibleDB.Value[] { new FlexibleDB.Value("id", id) });
+
+            int points = (int)playerData[0][2];
+
+            bool result = ServerEmulator.LevelTable[level] <= points;
+
+            return Ok(!result);
+        }
+
+        public IActionResult RoundDataRequest()
+        {
+            object rawId = HttpContext.Session.GetInt32("user_id");
+
+            RoundData status = new();
+
+            if(rawId != null)
+            {
+                int id = (int)rawId;
+
+                Player player = ServerEmulator.Players.Get(id);
+                Round round = ServerEmulator.Rounds.GetPlayersRound(player);
+
+                status.Level = round.Level;
+                status.Score = ServerEmulator.LevelTable[round.Level];
+                status.RoundNumber = round.Iteration;
+                status.LeftTime = (byte)(round.WaitSeconds - ((DateTime.Now.Ticks - round.StartTime.Ticks) / TimeSpan.TicksPerSecond));
+            }
+
+            return Ok(JsonSerializer.Serialize(status));
+        }
+
+        public IActionResult QueueDataRequest()
+        {
+            object rawId = HttpContext.Session.GetInt32("user_id");
+
+            QueueData status = new();
+
+            if (rawId != null)
+            {
+                int id = (int)rawId;
+
+                Player player = ServerEmulator.Players.Get(id);
+                DateTime time = DateTime.Now;
+
+                status.Level = player.Level;
+                status.PlayersCount = ServerEmulator.Queue.Lenght;
+                status.WaitTime = $"{time.Minute - player.QueueStart.Minute}:{time.Second - player.QueueStart.Second}";
+            }
+
+            return Ok(JsonSerializer.Serialize(status));
+        }
+
+        public IActionResult GetMenuPageStatus()
+        {
+            object rawId = HttpContext.Session.GetInt32("user_id");
+
+            MenuPageData status = new();
+
+            if (rawId != null)
+            {
+                int id = (int)rawId;
+
+                DataRowCollection collection = ServerEmulator.Database.CreateGetRequest("users", new DB.FlexibleDB.Value[] { new DB.FlexibleDB.Value("id", id) });
+
+                status.Score = (int)collection[0][2];
+                status.Games = (int)collection[0][3];
+            }
+
+            return Ok(JsonSerializer.Serialize(status));
+        }
     }
 }

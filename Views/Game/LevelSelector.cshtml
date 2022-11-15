@@ -11,6 +11,69 @@
             proveAuth("@Url.Action("ProveAuth")");
 
             setInterval(() => hearthbeat("@Url.Action("Hearthbeat")"), 1000);
+
+            var level1 = document.getElementById("level-1");
+            var level2 = document.getElementById("level-2");
+            var level3 = document.getElementById("level-3");
+            var level4 = document.getElementById("level-4");
+            var level5 = document.getElementById("level-5");
+            var level6 = document.getElementById("level-6");
+            var level7 = document.getElementById("level-7");
+            var level8 = document.getElementById("level-8");
+            var level9 = document.getElementById("level-9");
+            var level10 = document.getElementById("level-10");
+            var level11 = document.getElementById("level-11");
+            var level12 = document.getElementById("level-12");
+            var level13 = document.getElementById("level-13");
+            var level14 = document.getElementById("level-14");
+            var level15 = document.getElementById("level-15");
+            var level16 = document.getElementById("level-16");
+            var level17 = document.getElementById("level-17");
+            var level18 = document.getElementById("level-18");
+            var level19 = document.getElementById("level-19");
+            var level20 = document.getElementById("level-20");
+
+            verifyButtonState("@Url.Action("VerifyButtonState")", level1, 1);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level2, 2);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level3, 3);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level4, 4);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level5, 5);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level6, 6);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level7, 7);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level8, 8);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level9, 9);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level10, 10);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level11, 11);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level12, 12);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level13, 13);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level14, 14);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level15, 15);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level16, 16);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level17, 17);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level18, 18);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level19, 19);
+            verifyButtonState("@Url.Action("VerifyButtonState")", level20, 20);
+
+            level1.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 1); }; 
+            level2.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 2); };
+            level3.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 3); };
+            level4.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 4); };
+            level5.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 5); };
+            level6.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 6); };
+            level7.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 7); };
+            level8.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 8); };
+            level9.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 9); };
+            level10.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 10); };
+            level11.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 11); };
+            level12.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 12); };
+            level13.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 13); };
+            level14.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 14); };
+            level15.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 15); };
+            level16.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 16); };
+            level17.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 17); };
+            level18.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 18); };
+            level19.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 19); };
+            level20.onclick = function() { sendQueueRequest("@Url.Action("SendQueueRequest")", 20); };
         };
     </script>
 }
@@ -21,46 +84,46 @@
 </div>
 <div class="level-table text-center">
     <nav>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
+        <button id="level-1" class="light-button">Уровень 1</button>
+        <button id="level-2" class="light-button">Уровень 2</button>
     </nav>
      <nav>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
+        <button id="level-3" class="light-button">Уровень 3</button>
+        <button id="level-4" class="light-button">Уровень 4</button>
     </nav>
         <nav>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
+        <button id="level-5" class="light-button">Уровень 5</button>
+        <button id="level-6" class="light-button">Уровень 6</button>
     </nav>
         <nav>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
+        <button id="level-7" class="light-button">Уровень 7</button>
+        <button id="level-8" class="light-button">Уровень 8</button>
     </nav>
         <nav>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
+        <button id="level-9" class="light-button">Уровень 9</button>
+        <button id="level-10" class="light-button">Уровень 10</button>
     </nav>
         <nav>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
+        <button id="level-11" class="light-button">Уровень 11</button>
+        <button id="level-12" class="light-button">Уровень 12</button>
     </nav>
         <nav>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
+        <button id="level-13" class="light-button">Уровень 13</button>
+        <button id="level-14" class="light-button">Уровень 14</button>
     </nav>
         <nav>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
+        <button id="level-15" class="light-button">Уровень 15</button>
+        <button id="level-16" class="light-button">Уровень 16</button>
     </nav>
         <nav>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
+        <button id="level-17" class="light-button">Уровень 17</button>
+        <button id="level-18" class="light-button">Уровень 18</button>
     </nav>
-        <nav>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'">Свободная игра</button>
-        <button class="light-button" onclick="location.href='@Url.Action("Queue", "Game", new { })'" disabled="disabled">Свободная игра</button>
+    <nav>
+        <button id="level-19" class="light-button">Уровень 19</button>
+        <button id="level-20" class="light-button">Уровень 20</button>
     </nav>
 </div>
 <div class="text-center">
-    <button id="light-button-exit" class="light-button" onclick="location.href='@Url.Action("Index", "Game", new { })'">Выйти</button>
+    <button id="light-button-exit" class="light-button" onclick="location.href='@Url.Action("Menu", "Game", new { })'">Выйти</button>
 </div>

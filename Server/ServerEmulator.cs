@@ -20,7 +20,6 @@ namespace RockPaperScissors.Server
 
         public static int TestPlayersUsed = 0;
 
-
         public static bool Running { get; private set; } = true;
 
         public static readonly Dictionary<byte, byte> LevelTable = new()
