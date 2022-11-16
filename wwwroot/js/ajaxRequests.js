@@ -127,6 +127,21 @@ function verifyButtonState(url, button, level) {
     });
 }
 
+function verifyTextState(url, text) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        dataType: "json",
+        async: true,
+        success: function (result) {
+            if (result) {
+                text.textContent = result.toString() + " баллов";
+            }
+        }
+    });
+}
+
+
 function roundDataRequest(url, roundText, scoreText, leftTimeText) {
     $.ajax({
         type: "POST",
@@ -139,7 +154,7 @@ function roundDataRequest(url, roundText, scoreText, leftTimeText) {
                 if (resultObject != null)
                 {
                     if (resultObject.RoundNumber != null && resultObject.Level != null)
-                        roundText.textContent = "Раунд: " + resultObject.RoundNumber.toString() + "-" + resultObject.Level.toString();
+                        roundText.textContent = "Раунд: " + resultObject.Level.toString() + "-" + resultObject.RoundNumber.toString();
 
                     if (resultObject.Score != null)
                         scoreText.textContent = "Взнос: " + resultObject.Score.toString();

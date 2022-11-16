@@ -69,7 +69,7 @@ namespace RockPaperScissors.Server
         private int _waitSeconds = 5;
         private byte _level = 0;
         private int _score = 0;
-        private int _iteration = 0;
+        private int _iteration = 1;
         private DateTime _startTime;
 
         private Status _status = Status.initialized;
@@ -168,7 +168,7 @@ namespace RockPaperScissors.Server
                         _winners = new List<Player>();
 
                     _winners.Add(input.Player);
-                    ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", ((int)collection[0][2]) + _score), new DB.FlexibleDB.Value("id", input.Player.Id));
+                    ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", ((int)collection[0][2]) + (_score * 2)), new DB.FlexibleDB.Value("id", input.Player.Id));
                 }
                 else if(level != 0)
                 {

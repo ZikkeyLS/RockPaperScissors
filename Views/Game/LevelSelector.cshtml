@@ -32,6 +32,9 @@
             var level18 = document.getElementById("level-18");
             var level19 = document.getElementById("level-19");
             var level20 = document.getElementById("level-20");
+            var text = document.getElementById("pointsText");
+
+            verifyTextState("@Url.Action("VerifyTextState")", text);
 
             verifyButtonState("@Url.Action("VerifyButtonState")", level1, 1);
             verifyButtonState("@Url.Action("VerifyButtonState")", level2, 2);
@@ -79,7 +82,7 @@
 }
 
 <div class="text-center">
-    <h2>2543423 баллов</h2>
+    <h2 id="pointsText">0 баллов</h2>
     <h2>Выберите уровень:</h2>
 </div>
 <div class="level-table text-center">

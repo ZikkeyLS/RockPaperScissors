@@ -2,14 +2,31 @@
 {
     public class Player : IDisposable
     {
+        public class WinData
+        {
+            public class WinPlayerData
+            {
+                public string Name { get; set; }
+                public int Choice { get; set; }
+                public bool Winner { get; set; }
+            }
+
+            public WinPlayerData Players { get; set; }
+            public int Round { get; set; }
+            public int Iteration { get; set; }
+            public bool YouWon { get; set; }
+        }
+
         public readonly int Id;
         public readonly string Name;
         public byte Level = 0;
 
         private DateTime lastTime;
         private DateTime queueStart;
+        private WinData winData;
 
         public DateTime QueueStart => queueStart;
+        public WinData LastWinData => winData;
 
         public Player(int id, string name, byte level = 0)
         {
@@ -23,6 +40,11 @@
         public void SetQueueStart()
         {
             queueStart = DateTime.Now;
+        }
+
+        public void SetWinData(WinData winData)
+        {
+            this.winData = winData;
         }
 
         public async Task Live()

@@ -325,6 +325,17 @@ namespace RockPaperScissors.Controllers
             return Ok(JsonSerializer.Serialize(status));
         }
 
+        public IActionResult VerifyTextState()
+        {
+            int id = (int)HttpContext.Session.GetInt32("user_id");
+
+            DataRowCollection playerData = ServerEmulator.Database.CreateGetRequest("users", new FlexibleDB.Value[] { new FlexibleDB.Value("id", id) });
+
+            int points = (int)playerData[0][2];
+
+            return Ok(points);
+        }
+
         public IActionResult VerifyButtonState(byte level)
         {
             int id = (int)HttpContext.Session.GetInt32("user_id");
