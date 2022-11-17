@@ -355,18 +355,27 @@ namespace RockPaperScissors.Controllers
 
             RoundData status = new();
 
-            if(rawId != null)
+            try
             {
-                int id = (int)rawId;
+                if (rawId != null)
+                {
+                    int id = (int)rawId;
 
-                Player player = ServerEmulator.Players.Get(id);
-                Round round = ServerEmulator.Rounds.GetPlayersRound(player);
+                    Player player = ServerEmulator.Players.Get(id);
+                    Round round = ServerEmulator.Rounds.GetPlayersRound(player);
 
-                status.Level = round.Level;
-                status.Score = ServerEmulator.LevelTable[round.Level];
-                status.RoundNumber = round.Iteration;
-                status.LeftTime = (byte)(round.WaitSeconds - ((DateTime.Now.Ticks - round.StartTime.Ticks) / TimeSpan.TicksPerSecond));
+                    status.Level = round.Level;
+                    status.Score = ServerEmulator.LevelTable[round.Level];
+                    status.RoundNumber = round.Iteration;
+                    status.LeftTime = (byte)(round.WaitSeconds - ((DateTime.Now.Ticks - round.StartTime.Ticks) / TimeSpan.TicksPerSecond));
+                }
+
             }
+            catch
+            {
+
+            }
+
 
             return Ok(JsonSerializer.Serialize(status));
         }
@@ -386,7 +395,10 @@ namespace RockPaperScissors.Controllers
 
                 status.Level = player.Level;
                 status.PlayersCount = ServerEmulator.Queue.Lenght;
-                status.WaitTime = $"{time.Minute - player.QueueStart.Minute}:{time.Second - player.QueueStart.Second}";
+
+                TimeSpan result = time - player.QueueStart;
+
+                status.WaitTime = $"{result.Minutes}:{result.Seconds}";
             }
 
             return Ok(JsonSerializer.Serialize(status));

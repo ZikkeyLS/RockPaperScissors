@@ -1,4 +1,6 @@
-﻿namespace RockPaperScissors.Server
+﻿using RockPaperScissors.JsonModels;
+
+namespace RockPaperScissors.Server
 {
     public class Player : IDisposable
     {
@@ -23,10 +25,12 @@
 
         private DateTime lastTime;
         private DateTime queueStart;
-        private WinData winData;
+       // private WinData winData;
+        private StatusData status;
 
         public DateTime QueueStart => queueStart;
-        public WinData LastWinData => winData;
+        //public WinData LastWinData => winData;
+        public StatusData LastStatusData => status;
 
         public Player(int id, string name, byte level = 0)
         {
@@ -40,11 +44,6 @@
         public void SetQueueStart()
         {
             queueStart = DateTime.Now;
-        }
-
-        public void SetWinData(WinData winData)
-        {
-            this.winData = winData;
         }
 
         public async Task Live()
@@ -72,6 +71,36 @@
         public void SetLastTime(DateTime time)
         {
             lastTime = time;
+        }
+
+        public void WriteLastStatusData()
+        {
+            status.PlayerWinner = false;
+
+            Player player = ServerEmulator.Players.Get(Id);
+            Round round = ServerEmulator.Rounds.GetPlayersRound(player);
+
+            status.Level = round.Level;
+            status.Iteration = round.Iteration;
+
+            for (int i = 0; i < round.Inputs.Length; i++)
+            {
+                StatusData.PlayerData playerData = status.Players[i];
+
+                playerData.Name = round.Inputs[i].Player.Name;
+                playerData.Choice = (byte)round.Inputs[i].Value;
+                playerData.Winner = false;
+            }
+
+            for (int i = 0; i < round.Winners.Length; i++)
+            {
+                StatusData.PlayerData playerData = status.Players[i];
+
+                playerData.Winner = true;
+
+                if (Id == round.Winners[i].Id)
+                    status.PlayerWinner = true;
+            }
         }
 
         public void Dispose()

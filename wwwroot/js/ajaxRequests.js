@@ -141,7 +141,6 @@ function verifyTextState(url, text) {
     });
 }
 
-
 function roundDataRequest(url, roundText, scoreText, leftTimeText) {
     $.ajax({
         type: "POST",

@@ -81,6 +81,7 @@ namespace RockPaperScissors.Server
         public int Iteration => _iteration;
         public DateTime StartTime => _startTime;
         public int WaitSeconds => _waitSeconds;
+        public PlayerInput[] Inputs => _inputs;
 
         public Round(Player[] players, int waitSeconds, byte level)
         {
