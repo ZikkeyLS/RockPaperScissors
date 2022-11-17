@@ -212,3 +212,73 @@ function getMenuPageStatus(url, scoreText, gamesText) {
         }
     });
 }
+
+function getGameStatusStatus(url, roundInfoText, winnerText, nickname01Text, choice01Image, nickname02Text, choice02Image, nickname03Text, choice03Image, statusText, continueButton, exitButton) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        async: true,
+        success: function (result) {
+            if (result != null) {
+                const resultObject = JSON.parse(result);
+
+                if (resultObject != null) {
+
+                    if (resultObject.PlayerWinner != null && resultObject.Players != null)
+                    {
+                        var winnerCount = 0;
+
+                        winnerText.textContent = "Победители: ";
+
+                        for (i = 0; i < resultObject.Players.length; i++)
+                        {
+                            if (resultObject.Players[i].Winner) {
+                                winnerText.textContent += resultObject.Players[i].Name;
+                                if (winnerCount != 0)
+                                    winnerText.textContent += ",";
+                                winnerCount += 1;
+                            }
+
+                        }
+
+                        // Main Status
+
+                        if (winnerCount == 0) {
+                            statusText.textContent = "Ничья. Ждём очереди";
+                        }
+                        else
+                        {
+                            if (resultObject.PlayerWinner)
+                                statusText.textContent = "Поздравляем, вы выиграли!";
+                            else
+                                statusText.textContent = "К сожалению, вы проиграли!";
+                        }
+
+                        // Buttons
+
+                        if (resultObject.PlayerWinner) {
+                            continueButton.style.visibility = "visible";
+                            exitButton.remove();
+                        }
+                        else if (resultObject.PlayerWinner == false && winnerCount != 0) {
+                            continueButton.remove();
+                            exitButton.style.visibility = "vissible";
+                        }
+                        else if (winnerCount == 0) { 
+                            continueButton.remove();
+                            exitButton.remove();
+                        }
+
+                        // Round info
+
+                        roundInfoText.textContent = "Раунд: " + resultObject.Level.toString() + "-" + resultObject.Iteration.toString();
+                    }
+
+
+
+                    // fixButtons
+                }
+            }
+        }
+    });
+}

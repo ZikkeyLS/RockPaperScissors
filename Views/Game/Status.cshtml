@@ -10,6 +10,24 @@
         window.onload = function() {
             proveAuth("@Url.Action("ProveAuth")");
 
+            var roundInfoText = document.getElementById("round-info-text");
+            var winnerText = document.getElementById("winner-text");
+
+            var nickname01Text = document.getElementById("nickname01-text");
+            var choice01Image = document.getElementById("choice01-image");
+
+            var nickname02Text = document.getElementById("nickname02-text");
+            var choice02Image = document.getElementById("choice02-image");
+
+            var nickname03Text = document.getElementById("nickname03-text");
+            var choice03Image = document.getElementById("choice03-image");
+
+            var statusText = document.getElementById("status-text");
+            var continueButton = document.getElementById("continue-button");
+            var exitButton = document.getElementById("exit-button");
+
+            getGameStatusStatus("@Url.Action("GetGameStatusStatus")", roundInfoText, winnerText, nickname01Text, choice01Image, nickname02Text, choice02Image, nickname03Text, choice03Image, statusText, continueButton, exitButton);
+
             setInterval(() => hearthbeat("@Url.Action("Hearthbeat")"), 1000);
         };
     </script>
@@ -19,25 +37,25 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6 text-center">
-                <h2>Раунд: 0-1</h2>
-                <h2>Победители: Zikkey</h2>
+                <h2 id="round-info-text">Раунд: 0-1</h2>
+                <h2 id="winner-text">Победители: Zikkey</h2>
                 <div class="figure-block">
                     <div>
-                        <h4>Zikkey</h4>
-                        <img class="circle" src="/images/RawCirclesNamed/Hands_710_01.png" alt="ChoiceA"/>
+                        <h4 id="nickname01-text">Zikkey</h4>
+                        <img id="choice01-image" class="circle" src="/images/RawCirclesNamed/Hands_710_01.png" alt="ChoiceA"/>
                     </div>
                     <div>
-                        <h4>Zikkey2</h4>
-                        <img class="circle" src="/images/RawCirclesNamed/Hands_710_02.png" alt="ChoiceB"/>
+                        <h4 id="nickname02-text">Zikkey2</h4>
+                        <img id="choice02-image" class="circle" src="/images/RawCirclesNamed/Hands_710_02.png" alt="ChoiceB"/>
                     </div>
                     <div>
-                        <h4>Zikkey3</h4>
-                        <img class="circle" src="/images/RawCirclesNamed/Hands_710_03.png" alt="ChoiceC"/>
+                        <h4 id="nickname03-text">Zikkey3</h4>
+                        <img id="choice03-image" class="circle" src="/images/RawCirclesNamed/Hands_710_03.png" alt="ChoiceC"/>
                     </div>
                 </div>
                 <h2 id="status-text">Вы выиграли!</h2>
-                <button class="light-button" visibility="hidden">Продолжить</button>
-                <button class="light-button">Выйти</button>
+                <button id="continue-button" onclick="location.href='@Url.Action("Win", "Game", new { })'" class="light-button">Продолжить</button>
+                <button id="exit-button" onclick="location.href='@Url.Action("Menu", "Game", new { })'" class="light-button">Выйти</button>
             </div>
         </div>
     </div>

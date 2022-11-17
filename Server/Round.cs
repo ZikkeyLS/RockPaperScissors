@@ -61,7 +61,7 @@ namespace RockPaperScissors.Server
         };
 
         private Player[] _players = new Player[3];
-        private List<Player> _winners;
+        private List<Player> _winners = new();
 
         private PlayerInput[] _inputs = new PlayerInput[3];
         private int _inputsCount = 0;
@@ -77,6 +77,7 @@ namespace RockPaperScissors.Server
         public Status GameStatus => _status;
         public byte Level => _level;
         public Player[] Winners => _winners.ToArray();
+        public Player[] Players => _players;
         public bool HasWinner => Winners != null;
         public int Iteration => _iteration;
         public DateTime StartTime => _startTime;
@@ -96,6 +97,7 @@ namespace RockPaperScissors.Server
 
             _level = level;
             _score = ServerEmulator.LevelTable[level];
+            _inputs = new PlayerInput[3];
 
             if (_status == Status.readress)
                 await Task.Delay(5000);
@@ -149,11 +151,28 @@ namespace RockPaperScissors.Server
                 return;
             }
 
-            if (loserCount == 0 && nonCount == 0)
+            if (loserCount == 0 || loserCount == 3)
             {
+                if(nonCount != 0)
+                {
+                    _status = Status.denied;
+                    await Task.Delay(2000);
+                    ServerEmulator.Rounds.Remove(this);
+                    return;
+                }
+
                 _status = Status.readress;
                 _iteration += 1;
                 _inputsCount = 0;
+
+                for (int i = 0; i < players.Length; i++)
+                {
+                    if (players[i] != null)
+                        players[i].WriteLastStatusData();
+                }
+
+                await Task.Delay(2000);
+
                 await Open(players, waitSeconds, level);
                 return;
             }
@@ -165,9 +184,6 @@ namespace RockPaperScissors.Server
 
                 if (input.Winner == 1)
                 {
-                    if (_winners == null)
-                        _winners = new List<Player>();
-
                     _winners.Add(input.Player);
                     ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("points", ((int)collection[0][2]) + (_score * 2)), new DB.FlexibleDB.Value("id", input.Player.Id));
                 }
@@ -177,6 +193,12 @@ namespace RockPaperScissors.Server
                 }
 
                 ServerEmulator.Database.CreateChangeRequest("users", new DB.FlexibleDB.Value("games", ((int)collection[0][3]) + 1), new DB.FlexibleDB.Value("id", input.Player.Id));
+            }
+
+            for(int i = 0; i < players.Length; i++)
+            {
+                if(players[i] != null)
+                    players[i].WriteLastStatusData();
             }
 
             _status = Status.complete;

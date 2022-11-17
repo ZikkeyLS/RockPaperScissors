@@ -21,6 +21,8 @@
     #win-icon {
         width: 45vh;
         height: 45vh;
+        margin-left: 20vh;
+        margin-right: 20vh;
     }
 }
 
@@ -76,6 +78,8 @@
     #win-icon {
         width: 33vh;
         height: 33vh;
+        margin-left: 20vh;
+        margin-right: 20vh;
     }
 }
 

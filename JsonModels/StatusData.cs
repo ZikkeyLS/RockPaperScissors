@@ -9,9 +9,9 @@
             public bool Winner { get; set; }
         }
 
-        public int Level;
-        public int Iteration;
-        public PlayerData[] Players = new PlayerData[3];
-        public bool PlayerWinner;
+        public int Level { get; set; }
+        public int Iteration { get; set; }
+        public PlayerData[] Players { get; set; } = new PlayerData[3] { new(), new(), new() };
+        public bool PlayerWinner { get; set; }
     }
 }

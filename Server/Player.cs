@@ -75,31 +75,44 @@ namespace RockPaperScissors.Server
 
         public void WriteLastStatusData()
         {
+            status = new();
             status.PlayerWinner = false;
 
-            Player player = ServerEmulator.Players.Get(Id);
-            Round round = ServerEmulator.Rounds.GetPlayersRound(player);
+            Round round = ServerEmulator.Rounds.GetPlayersRound(this);
+
+            if (round == null)
+                return;
 
             status.Level = round.Level;
             status.Iteration = round.Iteration;
 
-            for (int i = 0; i < round.Inputs.Length; i++)
+            for (int i = 0; i < round.Players.Length; i++)
             {
                 StatusData.PlayerData playerData = status.Players[i];
+                Player player = round.Players[i];
 
-                playerData.Name = round.Inputs[i].Player.Name;
-                playerData.Choice = (byte)round.Inputs[i].Value;
-                playerData.Winner = false;
+                if (player != null)
+                {
+                    playerData.Name = round.Players[i].Name;
+
+                    if(round.Inputs[i] != null)
+                        playerData.Choice = (byte)round.Inputs[i].Value;
+
+                    playerData.Winner = false;
+                }
             }
 
             for (int i = 0; i < round.Winners.Length; i++)
             {
                 StatusData.PlayerData playerData = status.Players[i];
 
-                playerData.Winner = true;
+                if(playerData != null)
+                {
+                    playerData.Winner = true;
 
-                if (Id == round.Winners[i].Id)
-                    status.PlayerWinner = true;
+                    if (Id == round.Winners[i].Id)
+                        status.PlayerWinner = true;
+                }
             }
         }
 

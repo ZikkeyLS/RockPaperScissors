@@ -127,10 +127,10 @@ namespace RockPaperScissors.Controllers
                 {
                     case Server.Round.Status.waiting:
                     case Server.Round.Status.initialized:
-                    case Server.Round.Status.readress:
                         status.UrlIndex = "Round";
                         break;
                     case Server.Round.Status.complete:
+                    case Server.Round.Status.readress:
                         status.UrlIndex = "Status";
                         break;
                     case Server.Round.Status.denied:
@@ -367,7 +367,7 @@ namespace RockPaperScissors.Controllers
                     status.Level = round.Level;
                     status.Score = ServerEmulator.LevelTable[round.Level];
                     status.RoundNumber = round.Iteration;
-                    status.LeftTime = (byte)(round.WaitSeconds - ((DateTime.Now.Ticks - round.StartTime.Ticks) / TimeSpan.TicksPerSecond));
+                    status.LeftTime = round.WaitSeconds - (DateTime.Now - round.StartTime).Seconds;
                 }
 
             }
@@ -418,6 +418,23 @@ namespace RockPaperScissors.Controllers
 
                 status.Score = (int)collection[0][2];
                 status.Games = (int)collection[0][3];
+            }
+
+            return Ok(JsonSerializer.Serialize(status));
+        }
+
+        public IActionResult GetGameStatusStatus()
+        {
+            object rawId = HttpContext.Session.GetInt32("user_id");
+
+            StatusData status = new();
+
+            if (rawId != null)
+            {
+                int id = (int)rawId;
+
+                Player player = ServerEmulator.Players.Get(id);
+                status = player.LastStatusData;
             }
 
             return Ok(JsonSerializer.Serialize(status));
