@@ -439,5 +439,24 @@ namespace RockPaperScissors.Controllers
 
             return Ok(JsonSerializer.Serialize(status));
         }
+
+        public IActionResult GetGameStatusWin()
+        {
+            object rawId = HttpContext.Session.GetInt32("user_id");
+
+            WinData status = new();
+
+            if (rawId != null)
+            {
+                int id = (int)rawId;
+
+                Player player = ServerEmulator.Players.Get(id);
+                status.Level = player.LastStatusData.Level;
+                status.ScoreAdvance = ServerEmulator.LevelTable[(byte)status.Level] * 2;
+                status.Score = (int)ServerEmulator.Database.CreateGetRequest("users", new FlexibleDB.Value[] { new FlexibleDB.Value("id", id) })[0][2];
+            }
+
+            return Ok(JsonSerializer.Serialize(status));
+        }
     }
 }

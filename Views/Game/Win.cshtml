@@ -10,7 +10,10 @@
         window.onload = function() {
             proveAuth("@Url.Action("ProveAuth")");  
         
+            hearthbeat("@Url.Action("Hearthbeat")");
             setInterval(() => hearthbeat("@Url.Action("Hearthbeat")"), 1000);
+
+            getGameStatusWin("@Url.Action("GetGameStatusWin")", document.getElementById("score-text"), document.getElementById("level-text"), document.getElementById("money-text"));
         };
     </script>
 }
@@ -20,9 +23,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-6 text-center">
-                <h2>0 баллов</h2>
-                <h2>Уровень: 0</h2>
-                <h2>Награда - 0 баллов</h2>
+                <h2 id="score-text">0 баллов</h2>
+                <h2 id="level-text">Уровень: 0</h2>
+                <h2 id="money-text">Награда - 0 баллов</h2>
                 <image src="/images/SameSize/Win_000.png" id="win-icon" />
                 <button class="light-button" onclick="location.href='@Url.Action("Menu", "Game", new { })'">Продолжить</button>
             </div>

@@ -73,47 +73,56 @@ namespace RockPaperScissors.Server
             lastTime = time;
         }
 
-        public void WriteLastStatusData()
+        public async void WriteLastStatusData()
         {
-            status = new();
-            status.PlayerWinner = false;
-
-            Round round = ServerEmulator.Rounds.GetPlayersRound(this);
-
-            if (round == null)
-                return;
-
-            status.Level = round.Level;
-            status.Iteration = round.Iteration;
-
-            for (int i = 0; i < round.Players.Length; i++)
+            await Task.Run(() =>
             {
-                StatusData.PlayerData playerData = status.Players[i];
-                Player player = round.Players[i];
+                status = new();
+                status.PlayerWinner = false;
 
-                if (player != null)
+                Round round = ServerEmulator.Rounds.GetPlayersRound(this);
+
+                if (round == null)
+                    return;
+
+                status.Level = round.Level;
+                status.Iteration = round.Iteration;
+
+                for (int i = 0; i < round.Players.Length; i++)
                 {
-                    playerData.Name = round.Players[i].Name;
+                    StatusData.PlayerData playerData = status.Players[i];
+                    Player player = round.Players[i];
 
-                    if(round.Inputs[i] != null)
-                        playerData.Choice = (byte)round.Inputs[i].Value;
+                    if (player != null)
+                    {
+                        playerData.Name = round.Players[i].Name;
 
-                    playerData.Winner = false;
+                        if (round.Inputs[i] != null)
+                            playerData.Choice = (byte)round.Inputs[i].Value;
+
+                        playerData.Winner = false;
+                    }
                 }
-            }
 
-            for (int i = 0; i < round.Winners.Length; i++)
-            {
-                StatusData.PlayerData playerData = status.Players[i];
-
-                if(playerData != null)
+                for (int i = 0; i < status.Players.Length; i++)
                 {
-                    playerData.Winner = true;
+                    if (status.Players[i] == null)
+                        continue;
 
+                    for (int j = 0; j < round.Winners.Length; j++)
+                    {
+                        if (status.Players[i].Name == round.Winners[j].Name)
+                        {
+                            status.Players[i].Winner = true;
+                            status.WinnersCount += 1;
+                        }
+                    }
+                }
+
+                for (int i = 0; i < round.Winners.Length; i++)
                     if (Id == round.Winners[i].Id)
                         status.PlayerWinner = true;
-                }
-            }
+            }); 
         }
 
         public void Dispose()

@@ -10,7 +10,10 @@
         window.onload = function() {
             proveAuth("@Url.Action("ProveAuth")");
 
-            var roundInfoText = document.getElementById("round-info-text");
+            hearthbeat("@Url.Action("Hearthbeat")")
+            setInterval(() => hearthbeat("@Url.Action("Hearthbeat")"), 1000);
+
+               var roundInfoText = document.getElementById("round-info-text");
             var winnerText = document.getElementById("winner-text");
 
             var nickname01Text = document.getElementById("nickname01-text");
@@ -28,7 +31,6 @@
 
             getGameStatusStatus("@Url.Action("GetGameStatusStatus")", roundInfoText, winnerText, nickname01Text, choice01Image, nickname02Text, choice02Image, nickname03Text, choice03Image, statusText, continueButton, exitButton);
 
-            setInterval(() => hearthbeat("@Url.Action("Hearthbeat")"), 1000);
         };
     </script>
 }
@@ -38,22 +40,22 @@
         <div class="row justify-content-center">
             <div class="col-lg-6 text-center">
                 <h2 id="round-info-text">Раунд: 0-1</h2>
-                <h2 id="winner-text">Победители: Zikkey</h2>
+                <h2 id="winner-text">Победители: </h2>
                 <div class="figure-block">
                     <div>
-                        <h4 id="nickname01-text">Zikkey</h4>
-                        <img id="choice01-image" class="circle" src="/images/RawCirclesNamed/Hands_710_01.png" alt="ChoiceA"/>
+                        <h4 id="nickname01-text"></h4>
+                        <img id="choice01-image" class="circle" alt="ChoiceA"/>
                     </div>
                     <div>
-                        <h4 id="nickname02-text">Zikkey2</h4>
-                        <img id="choice02-image" class="circle" src="/images/RawCirclesNamed/Hands_710_02.png" alt="ChoiceB"/>
+                        <h4 id="nickname02-text"></h4>
+                        <img id="choice02-image" class="circle" alt="ChoiceB"/>
                     </div>
                     <div>
-                        <h4 id="nickname03-text">Zikkey3</h4>
-                        <img id="choice03-image" class="circle" src="/images/RawCirclesNamed/Hands_710_03.png" alt="ChoiceC"/>
+                        <h4 id="nickname03-text"></h4>
+                        <img id="choice03-image" class="circle" alt="ChoiceC"/>
                     </div>
                 </div>
-                <h2 id="status-text">Вы выиграли!</h2>
+                <h2 id="status-text"></h2>
                 <button id="continue-button" onclick="location.href='@Url.Action("Win", "Game", new { })'" class="light-button">Продолжить</button>
                 <button id="exit-button" onclick="location.href='@Url.Action("Menu", "Game", new { })'" class="light-button">Выйти</button>
             </div>

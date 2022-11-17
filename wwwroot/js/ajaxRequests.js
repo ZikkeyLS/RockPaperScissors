@@ -226,57 +226,141 @@ function getGameStatusStatus(url, roundInfoText, winnerText, nickname01Text, cho
 
                     if (resultObject.PlayerWinner != null && resultObject.Players != null)
                     {
-                        var winnerCount = 0;
-
-                        winnerText.textContent = "Победители: ";
-
-                        for (i = 0; i < resultObject.Players.length; i++)
-                        {
-                            if (resultObject.Players[i].Winner) {
-                                winnerText.textContent += resultObject.Players[i].Name;
-                                if (winnerCount != 0)
-                                    winnerText.textContent += ",";
-                                winnerCount += 1;
-                            }
-
-                        }
-
-                        // Main Status
-
-                        if (winnerCount == 0) {
-                            statusText.textContent = "Ничья. Ждём очереди";
-                        }
-                        else
-                        {
-                            if (resultObject.PlayerWinner)
-                                statusText.textContent = "Поздравляем, вы выиграли!";
-                            else
-                                statusText.textContent = "К сожалению, вы проиграли!";
-                        }
-
-                        // Buttons
-
-                        if (resultObject.PlayerWinner) {
-                            continueButton.style.visibility = "visible";
-                            exitButton.remove();
-                        }
-                        else if (resultObject.PlayerWinner == false && winnerCount != 0) {
-                            continueButton.remove();
-                            exitButton.style.visibility = "vissible";
-                        }
-                        else if (winnerCount == 0) { 
-                            continueButton.remove();
-                            exitButton.remove();
-                        }
-
                         // Round info
 
                         roundInfoText.textContent = "Раунд: " + resultObject.Level.toString() + "-" + resultObject.Iteration.toString();
+
+                        winnerText.textContent = "Победители:";
+
+                        for (i = 0; i < resultObject.Players.length; i++) {
+                            if (resultObject.Players[i] == null)
+                                continue;
+
+                            if (i == 0) {
+                                choice01Image.src = "/images/Animations/HandShaking_1.gif";
+                            }
+                            else if (i == 1) {
+                                choice02Image.src = "/images/Animations/HandShaking_1.gif";
+                            }
+                            else if (i == 2) {
+                                choice03Image.src = "/images/Animations/HandShaking_1.gif";
+                            }
+                        }
+
+                        setTimeout(function ()
+                        {
+                            for (i = 0; i < resultObject.Players.length; i++) {
+                                if (resultObject.Players[i] == null)
+                                    continue;
+
+                                if (resultObject.Players[i].Winner) {
+                                    winnerText.textContent = winnerText.textContent + " " + resultObject.Players[i].Name;
+                                }
+
+                                if (i == 0) {
+                                    if (resultObject.Players[i].Name != null) {
+                                        nickname01Text.textContent = resultObject.Players[i].Name;
+                                    }
+                                    else {
+                                        nickname01Text.textContent = "Отключился";
+                                    }
+
+                                    choice01Image.src = getImageByInput(resultObject.Players[i].Choice);
+                                }
+                                else if (i == 1) {
+                                    if (resultObject.Players[i].Name != null) {
+                                        nickname02Text.textContent = resultObject.Players[i].Name;
+                                    }
+                                    else {
+                                        nickname02Text.textContent = "Отключился";
+                                    }
+
+                                    choice02Image.src = getImageByInput(resultObject.Players[i].Choice);
+                                }
+                                else if (i == 2) {
+                                    if (resultObject.Players[i].Name != null) {
+                                        nickname03Text.textContent = resultObject.Players[i].Name;
+                                    }
+                                    else {
+                                        nickname03Text.textContent = "Отключился";
+                                    }
+
+                                    choice03Image.src = getImageByInput(resultObject.Players[i].Choice);
+                                }
+
+
+                                // Main Status
+
+                                if (resultObject.WinnersCount == 0) {
+                                    statusText.textContent = "Ничья. Ждём очереди!";
+                                    exitButton.remove();
+                                    continueButton.remove();
+                                }
+                                else {
+                                    if (resultObject.PlayerWinner) {
+                                        statusText.textContent = "Поздравляем, вы выиграли!";
+                                        exitButton.remove();
+                                    }
+                                    else {
+                                        statusText.textContent = "К сожалению, вы проиграли!";
+                                        continueButton.remove();
+                                    }
+                                }
+                            }
+                        }, 1000);
                     }
+                }
+            }
+        }
+    });
+}
 
+function getImageByInput(input) {
+    if (input == 0) {
+        return "/images/RawCirclesNamed/Hands_710_01.png";
+    }
+    else if (input == 1) {
+        return "/images/RawCirclesNamed/Hands_710_02.png";
+    }
+    else if (input == 2) {
+        return "/images/RawCirclesNamed/Hands_710_03.png";
+    }
+    else if (input == 3) {
+        return "/images/RawCirclesNamed/Hands_710_04.png";
+    }
+    else if (input == 4) {
+        return "/images/RawCirclesNamed/Hands_710_05.png";
+    }
+    else if (input == 5) {
+        return "/images/RawCirclesNamed/Hands_710_06.png";
+    }
+    else if (input == 6) {
+        return "/images/RawCirclesNamed/Hands_710_07.png";
+    }
 
+    return "";
+}
 
-                    // fixButtons
+function getGameStatusWin(url, scoreText, levelText, moneyText)
+{
+    $.ajax({
+        type: "POST",
+        url: url,
+        async: true,
+        success: function (result) {
+            if (result != null) {
+                const resultObject = JSON.parse(result);
+
+                if (resultObject != null) {
+
+                    if (resultObject.Score != null)
+                        scoreText.textContent = resultObject.Score.toString() + " баллов на счёте";
+
+                    if (resultObject.Level != null)
+                        levelText.textContent = "Уровень: " + resultObject.Level.toString();
+
+                    if (resultObject.ScoreAdvance != null)
+                        moneyText.textContent = "Награда: " + resultObject.ScoreAdvance.toString() + " баллов";
                 }
             }
         }

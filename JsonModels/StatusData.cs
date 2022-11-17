@@ -12,6 +12,7 @@
         public int Level { get; set; }
         public int Iteration { get; set; }
         public PlayerData[] Players { get; set; } = new PlayerData[3] { new(), new(), new() };
-        public bool PlayerWinner { get; set; }
+        public bool PlayerWinner { get; set; } = false;
+        public int WinnersCount { get; set; } = 0;
     }
 }

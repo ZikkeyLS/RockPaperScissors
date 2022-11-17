@@ -39,7 +39,7 @@ namespace RockPaperScissors.Server
         public class PlayerInput
         {
             public readonly Player Player;
-            public readonly int Value = 0;
+            public readonly int Value = -1;
             public int Winner = 1;
 
             public PlayerInput(Player player, int value)
@@ -108,12 +108,13 @@ namespace RockPaperScissors.Server
 
             List<PlayerInput> checkedInputs = new();
 
+            int loserCount = 0;
+            int nonCount = 0;
+
             for (int i = 0; i < _inputs.Length; i++)
                 if (_inputs[i] != null)
                     checkedInputs.Add(_inputs[i]);
 
-            int loserCount = 0;
-            int nonCount = 0;
 
             for (int i = 0; i < checkedInputs.Count; i++)
             {
@@ -133,9 +134,9 @@ namespace RockPaperScissors.Server
 
                     if (input != checkInput)
                     {
-                        if (status.BeatenBy.Contains((Figure)checkInput.Value))
+                        Figure vs = (Figure)checkInput.Value;
+                        if (checkInput.Value != -1 && status.BeatenBy.Contains(vs))
                         {
-                            Console.WriteLine("Looser" + input.Player.Id + " input" + input.Value);
                             input.Winner = 0;
                             loserCount += 1;
                         }
@@ -162,7 +163,6 @@ namespace RockPaperScissors.Server
                 }
 
                 _status = Status.readress;
-                _iteration += 1;
                 _inputsCount = 0;
 
                 for (int i = 0; i < players.Length; i++)
@@ -171,6 +171,7 @@ namespace RockPaperScissors.Server
                         players[i].WriteLastStatusData();
                 }
 
+                _iteration += 1;
                 await Task.Delay(2000);
 
                 await Open(players, waitSeconds, level);
@@ -214,6 +215,16 @@ namespace RockPaperScissors.Server
 
         public void AddPlayerInput(Player player, int value)
         {
+            if (_status != Status.waiting)
+                return;
+
+            for (int i = 0; i < _inputs.Length; i++)
+                if (_inputs[i] != null && _inputs[i].Player == player)
+                {
+                    _inputs[i] = new PlayerInput(player, value);
+                    return;
+                }
+
             _inputs[_inputsCount] = new PlayerInput(player, value);
             _inputsCount += 1;
         }
